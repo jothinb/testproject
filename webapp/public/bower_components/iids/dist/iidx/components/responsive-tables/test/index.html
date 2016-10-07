@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Responsive Tables</title>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../css/ge-bootstrap.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+    <style>
+    /* backgrounds for illustration only */
+    /* shown on all screen widths */
+      .table.responsive .essential {
+        background: #22436b;
+      }
+    /* shown on screen widths > 321px */
+      .table.responsive .optional {
+        background: #056083;
+      }
+    </style>
+  </head>
+  <body>
+    <table class="table table-bordered table-responsive">
+      <thead>
+        <tr>
+          <th class="foo essential">Site Name</th>
+          <th class="optional">Turbine SN</th>
+          <th>Standard Deviation</th>
+          <th class="optional">Average</th>
+          <th class="essential">Median</th>
+          <th>Percentile</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="foo"><a href="#">XYZ</a></td>
+          <td>100000</td>
+          <td>95.79</td>
+          <td>96.70</td>
+          <td>4.79</td>
+          <td>60</td>
+        </tr>
+          <tr>
+          <td class="foo"><a href="#">XYZ</a></td>
+          <td>100000</td>
+          <td>95.79</td>
+          <td>96.70</td>
+          <td>4.79</td>
+          <td>60</td>
+        </tr>   <tr>
+          <td class="foo"><a href="#">XYZ</a></td>
+          <td>100000</td>
+          <td>95.79</td>
+          <td>96.70</td>
+          <td>4.79</td>
+          <td>60</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        baseUrl: '../'
+      });
+
+      require(['responsive-tables']);
+    </script>
+    <script src="../components/respond/respond.src.js"></script>
+  </body>
+</html>

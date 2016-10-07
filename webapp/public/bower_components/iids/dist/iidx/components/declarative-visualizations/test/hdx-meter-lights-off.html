@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../css/hdx-declarative-visualizations-lights-off.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+  </head>
+  <body class='test-container'>
+  <div>
+    <div id="meter1" data-visualization="meter" data-max="230" data-value="120" data-threshold="180" data-markers='[["H", 212], ["L", 32]]' data-unit="&deg;F"></div>
+
+    <div id="meter2" data-visualization="meter" data-max="230" data-value="120" data-threshold="180" data-markers='[["H", 212], ["L", 32]]' data-unit="&deg;F" style="height:40px; width: 350px"></div>
+  </div>
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+    
+      require.config({
+        "baseUrl": "../"
+      });
+      require(['hdx-declarative-visualizations'], function(visualizations) {
+        $('div[data-visualization="meter"]').each(function(i, element) {
+          var meter = visualizations.meter(element);        
+        });
+      });
+      
+    </script>
+
+  </body>
+</html>
+

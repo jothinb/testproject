@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="../css/hdx-charts-lights-off.css" rel="stylesheet">
+  <style>
+/* These styles are for test page only. When component is used as part of project these styles should be inherited as part of project. */
+ 
+	body { 
+	 
+	  background-color: #1d1d1d;
+	}
+</style>
+  </head>
+  <body>
+	<div id="threshold-bar-chart" class="chart threshold-bar"></div>  
+    
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/hdx-require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "../"
+      });
+      require(['charts'], function(charts) {
+    	  var thresholdBarChartConfig = {
+    		      chart: {
+    		        renderTo: 'threshold-bar-chart',
+    		        height: 300,
+    		        width: 400,
+    		        type: 'column',
+    		        marginTop: 0,
+    		        marginLeft: 35, // this margin needs to be wide enough to accomodate the threshold line label
+    		      },
+    		      xAxis: {
+    		        categories: ['CDTI', 'DLPN', 'CD', 'PQR']
+    		      },
+    		      yAxis: {
+    		        labels: {
+    		          enabled: false
+    		        },
+    		        plotLines: [{
+    		          color: '#f3f3f3' /* TODO: FIX CSS COMPILE SO WE CAN USE THIS PROP $(".threshold-bar").css('color') */,
+    		          dashStyle: 'Dash',
+    		          label: {
+    		            text: 'Limit', //label for threashold bar line.
+    		            align: 'left',
+    		            textAlign: 'right',
+    		            x: -4,
+    		            y: 3,
+    		            style: {
+    		            	fontSize: $(".threshold-bar").css('font-size')
+    		            }
+    		          },
+    		          width: 1,
+    		          value: 56 // threshold value
+    		        }],
+    		        title: null,
+    		        gridLineWidth: 1 // horizontal grid line width
+    		      },
+    		      legend: {
+    		        enabled: false
+    		      },
+    		      plotOptions: {
+    		        series: {
+    		          borderWidth: 0,
+    		          pointPadding: 0.25,
+    		          colorByPoint: true,
+    		        },
+    		      },
+
+    		      series: [{
+    		        name: 'Count',
+    		        data: [25, 60, 38, 50]
+    		      }]
+    		    };
+		    
+		 charts.bar('threshold-bar-chart', thresholdBarChartConfig);
+      });
+      
+    </script>
+
+  </body>
+</html>

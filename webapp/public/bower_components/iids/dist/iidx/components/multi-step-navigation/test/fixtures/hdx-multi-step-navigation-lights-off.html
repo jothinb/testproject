@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <link href="../../css/hdx-multi-step-navigation-lights-off.css" rel="stylesheet">
+    <link href="base/css/hdx-multi-step-navigation-lights-off.css" rel="stylesheet">
+    <link href="base/css/hds-lights-off.css" rel="stylesheet">
+  </head>
+  </head>
+<body  style="margin-top: 20px; margin-left: 20px; margin-right: 20px; margin-bottom: 20px; height: 200px; width: 1030px;  background-color: #2B2B2B;"  >
+<div class="span10 multi-step-nav" >
+          <div class="navbar">
+            <div class="navbar-inner">
+              <div class="container" >
+                <ul>
+                  <li><a id="ex4" href="#tab1" data-toggle="tab" class= "tab"><i  class="icon-circle-blank"></i> Step 1: Lorem ipsum dolor</a></li>
+                  <li><a id="ex5" href="#tab2" data-toggle="tab"><i id="ex21" class="icon-circle-blank"></i> Step 2: Sit amet adipiscing</a></li>
+                  <li><a id="ex6"  href="#tab3" data-toggle="tab"><i id="Ex31" class="icon-circle-blank"></i> Step 3: Consecteur etud</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane" id="tab1">
+              Step 1 of 3
+            </div>
+            <div class="tab-pane" id="tab2">
+              Step 2 of 3
+            </div>
+            <div class="tab-pane" id="tab3">
+              Step 3 of 3
+            </div>
+            <ul class="pager wizard">
+              <li class="previous"><a>Previous</a></li>
+              <li id="next2" class="next" id="n2"><a>Next</a></li>
+              <li class="next finish" style="display:none;"><a href="javascript:;">Finish</a></li>
+            </ul>
+          </div>
+        </div>
+
+    <!-- Some refs will fail here depending on load context -->
+
+    <!-- these run the example under no test runner -->
+    <script src="../../components/requirejs/require.js"></script>
+    <script src="../../js/require.config.js"></script>
+
+    <!-- runs from Karma, either from root DX or component -->
+    <script src="base/components/requirejs/require.js"></script>
+    <script src="base/js/require.config.js"></script>
+    <script src="base/test/require.config.js"></script>
+
+
+
+  <script type="text/javascript">
+    var urlparts = window.location.href.split("/");
+
+    // determine if we are running as a fixture in a Karma test suite
+    // adjust base url appropriately
+    var baseURL;
+    if (urlparts[3] == "debug.html" || urlparts[3] == "context.html") {
+        baseURL = "base";
+    } else {
+        baseURL = urlparts[0] + "/" + urlparts[1] + "/" + urlparts[2] + "/" + urlparts[3];
+    }
+	 //Settign this is very important, else Karma tests fail.
+	    require.config({
+	      baseUrl: baseURL
+	    });
+    //Use below to open fixture in browser (while developing fixture)
+ 	/*
+   require.config({
+        baseUrl: '../../../'
+      });
+	*/
+      require([
+               'twitter-bootstrap-wizard',
+               'multi-step-navigation',
+               'jquery'
+             ],function (){
+               $('.multi-step-nav').multiStepNavigation();
+           	    $("#next2").click();
+             });
+  </script>
+
+  </body>
+</html>

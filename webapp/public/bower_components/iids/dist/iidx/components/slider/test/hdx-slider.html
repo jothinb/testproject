@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+  <title>Slider Component</title>
+  <meta charset="utf8">
+  <link href="../css/hdx-slider.css" rel="stylesheet">
+  <link href="../css/responsive.css" rel="stylesheet">
+  <!--[if IE 9]>
+      <link id="theme-ie9" href="../css/ie9.css" rel="stylesheet" type="text/css">
+  <![endif]-->
+  <style>
+/* These styles are for test page only. When component is used as part of project these styles should be inherited as part of project. */
+ 
+	body { 
+	 
+	  background-color: #ffffff;
+	}
+</style>
+</head>
+<body>
+
+  <div class="container">
+  <div class="row">
+    <h2>Example sliders</h2>
+    <hr />
+    <br />
+    <div class="row">
+      <p> Slider with scale, label on right and buttons appart.</p>
+      <input 
+      class="slider span12" 
+      type="range" 
+      min="0" 
+      max="100" 
+      value="50"
+      data-slider-steps="10"
+      data-slider-highlight="#0098d6" 
+      data-slider-label-position='outside'
+      data-slider-snap='true'
+      data-slider-label-suffix=" Rpm"
+      data-slider-button-position="apart"
+      data-slider-tickmarks='4'
+      data-slider-scale='5'
+      />
+      </div>
+      </div>
+      </br>
+       <div class="container">
+    <div class="row">
+       
+      <input 
+      class="slider span12" 
+      type="range" 
+      min="0" 
+      max="10" 
+      value="5"
+      data-slider-steps="10"
+      data-slider-highlight="#0098d6" 
+      data-slider-label-position='outside'
+      data-slider-snap='true'
+      data-slider-label-suffix=" Rpm"
+      data-slider-button-position="apart"
+      />
+      </div>
+      </div>
+      </br>
+       <div class="container">
+    <div class="row">
+      <p> Slider without scale, label on right and buttons together.</p>
+       
+      <input 
+      class="slider span12" 
+      type="range" 
+      min="0" 
+      max="100" 
+      value="5"
+      data-slider-steps="10"
+      data-slider-highlight="#0098d6" 
+      data-slider-label-position='outside'
+      data-slider-snap='true'
+      data-slider-label-suffix=" Rpm"
+      data-slider-button-position="together"
+      />
+      </div>
+      </div>
+      </br>
+       <div class="container">
+    <div class="row">
+      <p> Slider without scale, only value label and buttons together.</p>
+      <input 
+      class="slider span4" 
+      type="range" 
+      min="0" 
+      max="77" 
+      value="33"
+      data-slider-steps="10"
+      data-slider-highlight="#0098d6" 
+      data-slider-label-position='outside'
+      data-slider-snap='true'
+      //data-slider-label-suffix=""
+      data-slider-button-position="together"
+      />
+      </div>
+      </div>
+      </br>
+       <div class="container">
+    <div class="row">
+      <p> Slider without scale, only value label label inside and no buttons</p>
+      <input 
+      class="slider span6" 
+      type="range" 
+      min="0" 
+      max="200" 
+      value="100" 
+      data-slider-buttons="false" 
+      />
+      
+     </div>
+      </div>
+      </br>
+       <div class="container">
+    <div class="row">
+      <p> Slider without scale, only value label label inside buttons apart</p>
+     
+      <input 
+      class="slider span5" 
+      type="range" 
+      min="500" 
+      max="1000" 
+      value="0"
+      data-slider-buttons='true'
+      data-slider-label-position="inside"
+      />
+      <br />
+ 
+      <p> Slider with scale, no ticks, only value label label inside buttons apart</p>
+      
+      <input 
+      class="slider span8" 
+      type="range" 
+      min="0" 
+      max="1000" 
+      value="399"
+      data-slider-buttons='true'
+      data-slider-button-position="apart"
+      data-slider-label-position="inside"
+      data-slider-scale="10"
+      />
+      </div>
+      </div>
+      </br>
+       <div class="container">
+    <div class="row">
+       <p> Slider with scale, ticks, only value label label inside buttons together</p>
+      <input 
+      class="slider span8" 
+      type="range" 
+      min="0" 
+      max="1000" 
+      value="750"
+      data-slider-buttons='true'
+      data-slider-button-position="together"
+      data-slider-label-position="inside"
+      data-slider-scale="10"
+      data-slider-tickmarks="10"
+      />
+      </div>
+      </div>
+      </br>
+       <div class="container">
+    <div class="row">
+      <p>
+       Slider with scale, , label with prefix and suffix (outside) & buttons apart</p>
+       <br>
+      <input 
+      class="slider span8" 
+      type="range" 
+      min="0" 
+      max="1000" 
+      value="10"
+      data-slider-buttons='true'
+      data-slider-button-position="apart"
+      data-slider-label-position="outside"
+      data-slider-scale="10"
+      data-slider-tickmarks="10"
+      data-slider-steps="100"
+      data-slider-snap="true"
+      data-slider-label-prefix="$"
+      data-slider-label-suffix=".00"
+      />
+
+      
+    </div>
+  </div>
+  <br />
+  <hr />
+  <br />
+  <p> Slider with highlight in different color </p>
+  
+
+  <div class="container">
+    <div class="row">
+      <input 
+      class="slider span10" 
+      type="range" 
+      min="0" 
+      max="500" 
+      value="150" 
+      data-slider-label-prefix="$"
+      data-slider-label-suffix=".00"
+      data-slider-button-position="apart"
+      data-slider-highlight="#ff5400"
+      data-slider-tickmarks="3"
+      data-slider-label-position="outside"
+      data-slider-scale="10"
+      data-slider-buttons="true"
+      data-slider-snap="true"
+      data-slider-steps="10"
+      />
+    </div>
+  </div>
+
+  <br />
+
+  
+
+  <script src="../components/requirejs/require.js"></script>
+  <script src="require.config.js"></script>
+  <script type="text/javascript">
+    require.config({
+      baseUrl: '../'
+    });
+    require(['jquery','slider'], function ($, slider) {
+      $('.slider').slider({
+        
+       
+
+      });
+    });
+  </script>
+
+</body>
+</html>

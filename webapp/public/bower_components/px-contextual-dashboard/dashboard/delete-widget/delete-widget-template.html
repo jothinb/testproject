@@ -1,0 +1,22 @@
+<div id="delete-widget" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3 class="modal-title">{{ "dashboard.widget.delete" | vmessages}}</h3>
+            </div>
+
+            <div class="modal-body clearfix">
+                {{ "dashboard.widget.confirm.delete" | vmessages}}
+            </div>
+
+            <div class="modal-footer">
+                <button id="delete-widget-cancel-btn" class="btn btn-default" data-dismiss="modal">{{"form.action.cancel" | vmessages }}</button>
+                <button id="delete-widget-ok-btn" class="btn btn-primary" data-dismiss="modal" ng-click="delete()">{{"form.action.ok" | vmessages }}</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

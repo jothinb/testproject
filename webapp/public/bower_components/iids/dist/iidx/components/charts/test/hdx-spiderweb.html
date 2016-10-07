@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="../css/hdx-charts.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div id="chart-spiderweb" class="chart"></div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/hdx-require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "../"
+      });
+      require(['charts'], function(charts) {
+        var data = {
+          xAxis: {
+            categories: ['KPI1', 'KPI2', 'KPI3', 'KPI4', 'KPI5', 'KPI6', 'KPI7', 'KPI8', 'KPI9'],
+          },
+          yAxis: {
+            max: 80000,
+          },
+          series: [{
+            name: 'Average',
+            data: [50000, 54000, 52000, 51000, 56000, 54000, 57000, 53000, 49000],
+          },{
+            name: 'Previous',
+            data: [32000, 36000, 60000, 51000, 46000, 60000, 37000, 60000, 59000],
+          },{
+            name: 'Custom Service Coord',
+            data: [30000, 39000, 62000, 41000, 36000, 64000, 27000, 63000, 49000],
+          }],
+        };
+        charts.spiderweb('chart-spiderweb', data);
+      });
+    </script>
+
+  </body>
+</html>

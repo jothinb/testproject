@@ -1,0 +1,83 @@
+{
+    "tableData": [
+        {
+            "sensorId": 1,
+            "value": 1432,
+            "timestamp": "Mon Sep 22 2014 12:35:40 GMT-0700 (PDT)",
+            "quality": "Good"
+        },
+        {
+            "sensorId": 2,
+            "value": 1857,
+            "timestamp": "Mon Sep 22 2014 12:34:40 GMT-0700 (PDT)",
+            "quality": "Good"
+        },
+        {
+            "sensorId": 3,
+            "value": 720,
+            "timestamp": "Mon Sep 22 2014 12:33:40 GMT-0700 (PDT)",
+            "quality": "Poor"
+        },
+        {
+            "sensorId": 4,
+            "value": 2600,
+            "timestamp": "Mon Sep 22 2014 12:32:40 GMT-0700 (PDT)",
+            "quality": "Excellent"
+        },
+        {
+            "sensorId": 5,
+            "value": 530,
+            "timestamp": "Mon Sep 22 2014 12:31:40 GMT-0700 (PDT)",
+            "quality": "Poor"
+        },
+        {
+            "sensorId": 3,
+            "value": 2134,
+            "timestamp": "Mon Sep 22 2014 12:30:40 GMT-0700 (PDT)",
+            "quality": "Excellent"
+        }
+    ],
+    "columns": [
+        {
+            "field": "sensorId",
+            "type": "string",
+            "inputType": "text",
+            "inputSize": 5,
+            "label": "ID"
+        },
+        {
+            "field": "timestamp",
+            "type": "date",
+            "inputType": "text",
+            "inputSize": 20,
+            "label": "Timestamp"
+        },
+        {
+            "field": "quality",
+            "type": "enum",
+            "inputType": "select",
+            "label": "Quality",
+            "options": [
+                {
+                    "label": "One",
+                    "option": 1
+                },
+                {
+                    "label": "Two",
+                    "option": 2
+                },
+                {
+                    "label": "Three",
+                    "option": 3
+                }
+            ]
+        },
+        {
+            "field": "value",
+            "type": "number",
+            "inputType": "text",
+            "inputSize": 10,
+            "label": "Value"
+        }
+    ]
+}

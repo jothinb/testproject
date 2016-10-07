@@ -1,0 +1,1 @@
+define(['./context-service', './widget-service', './widget-loader-service', './datasource-service', './view-service', './current-state-service', './slug-service', './dashboard-settings-service'], function() {});

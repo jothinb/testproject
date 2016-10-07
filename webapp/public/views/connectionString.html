@@ -1,0 +1,15 @@
+
+<div class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+                <h3>Connection String</h3>
+            </div>
+            <div class="modal-body" >
+                <span ng-if="dbConnectionString === 'null'">N/A</span>
+                <span ng-if="dbConnectionString !== 'null'">{{dbConnectionString}}</span>
+            </div>
+        </div>
+    </div>
+</div>

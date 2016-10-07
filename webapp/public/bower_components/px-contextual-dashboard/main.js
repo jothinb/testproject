@@ -1,0 +1,1 @@
+define(['./context-browser/main', './dashboard/main', './services/main', './configurable-dashboard-directive', './context-selector/main', './dashboard-alert/main'], function() {});

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf8">
+    <title>GE Software Slider</title>
+    <!-- used by local runs, will 404 from with the IIDx -->
+    <link href="../../../css/iidx-slider.css" rel="stylesheet">
+    <link href="../../../css/responsive.css" rel="stylesheet">
+    <!--[if IE 9]>
+    <link id="theme-ie9" href="../css/ie9.css" rel="stylesheet" type="text/css">
+    <![endif]-->
+
+    <!-- used by runs from within the IIDx, will 404 locally -->
+    <link href="/css/iids.css" rel="stylesheet">
+</head>
+<body>
+
+    <input
+        class="slider col-xs-5"
+        type="range"
+        min="0"
+        max="250"
+        value="200"
+        />
+
+    <script src="/components/requirejs/require.js"></script>
+
+    <!-- used by local runs, will 404 from with the IIDx -->
+    <script src="../../require.config.js"></script>
+
+    <!-- used by runs from within the IIDx, will 404 locally -->
+    <script src="/js/require.config.js"></script>
+
+    <script>
+        requirejs.config({
+            baseUrl: "/"
+        });
+    </script>
+
+    <script type="text/javascript">
+        require(['jquery','slider'], function ($, slider) {
+            $('.slider').slider({});
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<div ng-show="hasAlert" ng-class="{ 'alert alert-fixed-top alert-error': hasError, 'alert alert-fixed-top alert-success': hasSuccess }">
+    <button type="button" class="close" ng-click="hasAlert = false">&times;</button>
+    <span>{{alertMsg}}</span>
+</div>
+<div class="container">
+    <div class="row">
+            <div class="span12 module">
+                <div class="module-body">
+                    <div class="advancedSearch-container pull-left">
+                        <button class="btn btn-primary pull-left">Advanced Search</button>
+                    </div>
+                    <div class="search-container pull-right">
+                        <button class="btn btn-primary pull-left">Create Visualization</button>
+                        <button class="btn btn-primary pull-left" ng-click="openUploadModal()">Import Data</button>
+                        <form class="form-search pull-left">
+                            <div class="input-append">
+                                <input type="text" class="input-medium search-query" data-filter-table="listData"><button class="btn btn-icon"><i class="icon-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="table table-bordered" data-table-name="listData"></table>
+                </div>
+            </div>
+    </div>
+</div>

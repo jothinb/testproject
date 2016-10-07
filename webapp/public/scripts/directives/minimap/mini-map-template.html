@@ -1,0 +1,66 @@
+<div>
+
+
+	<span id="mini-map-bg" style="">
+		<img ng-src="/oasis/images/map/GE-Oasis-UI_150dpi_minimap_bg.png" style="max-width:100%; max-height: 100%;" >
+	</span>
+
+	<span id="mini-map-image" style="width: 293px; position: absolute; top: 5px; left: 1px;">
+		<img ng-src="/oasis/images/map/GE-Oasis-UI_150dpi_minimap.png" style="max-width:100%; max-height: 100%;" >
+	</span>
+
+	<span id="mini-map-zoom-controls" style="position: absolute; right: 1px; top: 1px; height: 98%;">
+
+		<span id="mini-map-tilt-btn-bg" style="width: 36px; position: absolute; top: 20px; right: 2px;">
+			<img ng-src="/oasis/images/map/GE-Oasis-UI_150dpi_minimap-tilt-bg.png" style="max-width:100%; max-height: 100%;" >
+		</span>
+		<span id="mini-map-zoom-btn" ng-click="zoom($event, zoomScale)" style="width: 38px; position: absolute; top: 4px; right: 1px;">
+			<img ng-src="/oasis/images/map/GE-Oasis-UI_150dpi_minimap-zoom.png" style="max-width:100%; max-height: 100%;" >
+		</span>
+		<span id="mini-map-zoom-out-btn" ng-click="zoom($event, -zoomScale)" style="width: 38px; position: absolute; bottom: 4px; right: 1px;">
+			<img ng-src="/oasis/images/map/GE-Oasis-UI_150dpi_minimap-zoom-out.png" style="max-width:100%; max-height: 100%;" >
+		</span>
+		<span id="mini-map-tilt-btn" ng-click="toggle_birdseye($event)" style="width: 15px; position: absolute; top: 24px; right: 12px;">
+			<img ng-src="/oasis/images/map/GE-Oasis-UI_150dpi_minimap-tilt.png" style="max-width:100%; max-height: 100%;" >
+		</span>
+	</span>
+
+	<!--<svg class="svg canvas" width="450" height="200" shape-rendering="auto" style="-->
+	<svg class="svg canvas" width="300" height="70" viewBox="0 0 300 70" style="
+    position: absolute;
+    left: 1px;
+    top: 1px;">
+
+		<defs>
+			<filter id="minimapDropShadow" x="-20%" y="-20%" width="150%" height="150%">
+				<feOffset result="offOut" in="SourceGraphic" dx="1" dy="1"></feOffset>
+				<feColorMatrix result="matrixOut" in="offOut" type="matrix"
+							   values="
+							   -0.1 0 0 0 0
+							   0 -0.1 0 0 0
+							   0 0 -0.1 0 0
+							   0 0 0 -0.5 0"></feColorMatrix>
+				<feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="10"></feGaussianBlur>
+				<feBlend in="SourceGraphic" in2="blurOut" mode="normal"></feBlend>
+			</filter>
+		</defs>
+
+		<!--<g id="mini-map" class="minimap" transform="translate(-50,-12)scale(0.25)">-->
+		<!--<g id="mini-map" class="minimap" x="0" y="0" transform="translate(0,-12)scale(0.25)">-->
+			<!--<g class="frame" transform="translate(0,0)">-->
+				<!--<rect class="background" width="190" height="150"-->
+					  <!--filter="url(#minimapDropShadow)"></rect>-->
+			<!--</g>-->
+		<!--</g>-->
+		<g id="mini-map" class="minimap" x="0" y="0" transform="translate(-48,0)">
+			<g class="frame" transform="translate(0,0)">
+				<rect class="background" width="48" height="60"
+					  filter="url(#minimapDropShadow)"
+					style="stroke-width:.5;"></rect>
+			</g>
+		</g>
+
+	</svg>
+
+	<!--span class="rotateMap" ng-click="rotate($event,true)"><i class="icon-repeat"></i></span-->
+</div>

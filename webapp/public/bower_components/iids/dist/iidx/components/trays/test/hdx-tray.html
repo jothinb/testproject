@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <link href="../css/hdx-trays.css" rel="stylesheet">
+  </head>
+  <body style="margin: 50px; background-color:#fff;">
+
+    <div class="tray filter-tray top collapse">
+      <div class="tray-inner">
+
+        <div class="filter-rule-group"></div>
+
+        <!-- client-side template -->
+        <script type="text/template" id="filter-rule-template">
+          <form class="inline-form filter-rule">
+            <span class="filter-item span2">
+              <select>
+                <option value="show">Show Only</option>
+                <option value="hide">Hide</option>
+                <option value="highlight">Highlight</option>
+              </select>
+            </span>
+            <span class="filter-item span2">
+              <select>
+                <option value="siteName">Site Name</option>
+                <option value="turbineSN">Turbine SN</option>
+                <option value="average">Average</option>
+                <option value="median">Median</option>
+                <option value="standardDeviation">Standard Deviation</option>
+                <option value="percentile">Percentile</option>
+              </select>
+            </span>
+            <span class="filter-item span1">
+              <select>
+                <option value="=">=</option>
+                <option value="&gt;">&gt;</option>
+                <option value="&gt;=">&gt;=</option>
+                <option value="&lt;">&lt;</option>
+                <option value="&lt;=">&lt;=</option>
+                <option value="startsWidth">starts with</option>
+                <option value="endsWith">ends width</option>
+                <option value="contains">contains</option>
+                <option value="doesNotContain">does not contain</option>
+              </select>
+            </span>
+            <span class="filter-item">
+              <input type="text" value="sample">
+            </span>
+            <span class="filter-item">
+              <button type="button" class="btn-link" data-toggle="filter-rule-remove"><i class="icon-remove-sign"></i></button>
+            </span>
+          </form>
+        </script>
+        <!-- end template -->
+
+        <button class="btn btn-link btn-large pull-left" data-toggle="filter-rule-add" type="button"><i class="icon-plus-sign"></i> Add Condition</button>
+        <div class="pull-right">
+          <button class="btn btn-inverse">Cancel</button>
+          <button class="btn btn-primary">Apply</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary tray-toggle" data-toggle="collapse" data-target=".tray">Filter</button>
+      <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-chevron-down"></i></button>
+      <ul class="dropdown-menu">
+        <li><a href="#"><strong>Items</strong></a></li>
+        <li><a href="#">Item 1</a></li>
+        <li><a href="#">Item 2</a></li>
+      </ul>
+    </div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "../"
+      });
+      require(['jquery', 'trays'], function($) {
+        $('.tray').iidsFilterTray();
+      });
+    </script>
+
+  </body>
+</html>

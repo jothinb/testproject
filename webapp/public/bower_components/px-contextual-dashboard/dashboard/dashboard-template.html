@@ -1,0 +1,36 @@
+<div ng-if="dashboard.hasContext()" class="row">
+    <div id="widgets-container" ng-if="dashboard.hasView()">
+        <section ng-repeat-start="widgetInstance in dashboard.getCurrentViewWidgets()"
+                 ng-class="{'col-sm-6': widgetInstance.size === 'half', 'col-sm-12': widgetInstance.size === 'full'}">
+            <div class="module widget-module">
+                <header class="module-header" ng-if="dashboard.isInEditMode()">
+                    <div class="pull-right">
+                        <button class="btn btn-icon delete-widget-btn" ng-click="dashboard.deleteWidget($index)">
+                            <i class="icon-ico_delete_sm"></i>
+                        </button>
+                        <button class="btn btn-icon edit-widget-btn" ng-click="dashboard.editWidget($index)">
+                            <i class="icon-ico_settings1_sm"></i>
+                        </button>
+                    </div>
+                </header>
+                <div class="module-body">
+                    <widget-renderer widget-instance="widgetInstance" index="$index"></widget-renderer>
+                </div>
+            </div>
+        </section>
+        <section ng-repeat-end ng-if="dashboard.shouldShowAddButtonForIndex($index)" class="chromeless col-sm-6">
+            <div ng-click="dashboard.addWidget($event, $index)" class="module-add-widget module-add-widget-half">
+                <a href="#"><i class="icon-plus-sign"></i> {{'dashboard.widget.add' | vmessages}}</a>
+            </div>
+        </section>
+        <section class="col-sm-12 chromeless" ng-if="dashboard.isInEditMode()">
+            <div ng-click="dashboard.addWidget($event)" class="module-add-widget module-add-widget-full">
+                <a href="#"><i class="icon-plus-sign"></i> {{'dashboard.widget.add' | vmessages}}</a>
+            </div>
+        </section>
+    </div>
+    <div id="no-view-text" ng-if="!dashboard.hasView()">
+        <h2>{{'dashboard.noviews.message' | vmessages}} <a class="color-blue" data-toggle="modal"
+                                                            data-target="#view-creator">{{'dashboard.noviews.link' | vmessages}}</a></h2>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="module col-md-8 section1">
+	<div class="topMap1">
+		<div class="pull-left topMaptitle1">
+			<h2>Map of {{address.title}}</h2>
+		</div>
+		<div class="pull-right button1">
+			<button class="btn dropdown-toggle pull-right mTop6" data-toggle="dropdown"><i class="icon-chevron-down"></i></button>
+			<ul class="nav nav-pills pull-right">
+				<button class="btn btn-large mRightm4" ng-class="{'active' : map === true}" ng-click="map = true">MAP</button>
+				<button class="btn btn-large" ng-class="{'active' : map === false}" ng-click="map = true">DATA</button>
+				<!--<li ng-class="{'active' : map === true}" ng-click="map = true"><a>MAP</a></li>-->
+				<!--<li ng-class="{'active' : map === false}" ng-click="map = false"><a>DATA</a></li>-->
+			</ul>
+			<ul class="dropdown-menu" ng-class="{'dropdown-menu-map' : map === true, 'dropdown-menu-data' : map === false}">
+				<li><a>Modify Data</a></li>
+				<li><a>Delete Visualization</a></li>
+			</ul>
+		</div>
+		<div class="pull-left data1">
+			<span> <img src="images/redDot.png" class="pRight5">{{address.configs[0].heading}}</span>
+			<span class="mLeft20"><img src="images/tealDot.png" ng-if="address.configs[1].heading" class="pRight5">{{address.configs[1].heading}}</span>
+		</div>
+		<div ng-show="map === true" class="pull-right search1">
+			<div class="input-group">
+				<input type="text" class="form-control">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button"><i class="icon-search"></i></button>
+						</span>
+			</div>
+		</div>
+	</div>
+	<div ng-show="map === true" class="map-canvas" id="map-canvas{{dataindex1}}"></div>
+	<div ng-show="map === false" class="dataView">
+		<div class="dataSets">
+			<div class="mTop10">Data Set 1: {{address.firstDataSetMetaData.dataSetName}}</div>
+			<div class="mTop10">Upload Data: {{address.firstDataSetMetaData.uploadDate}}</div>
+			<div class="mTop10">Number of Records: {{address.firstDataSetMetaData.numberOfRecords}}</div>
+			<div class="mTop10">Description: {{address.firstDataSetMetaData.description}}</div>
+			<div class="mTop10">Source File: {{address.firstDataSetMetaData.srcFile}}</div>
+
+		</div>
+		<div class="dataSets">
+			<div class="mTop10">Data Set 2: {{address.secondDataSetMetaData.dataSetName}}</div>
+			<div class="mTop10">Upload Data: {{address.secondDataSetMetaData.uploadDate}}</div>
+			<div class="mTop10">Number of Records: {{address.secondDataSetMetaData.numberOfRecords}}</div>
+			<div class="mTop10">Description: {{address.secondDataSetMetaData.description}}</div>
+			<div class="mTop10">Source File: {{address.secondDataSetMetaData.srcFile}}</div>
+		</div>
+		<div>
+			<div class="mTop20">Details: {{}}</div>
+		</div>
+	</div>
+</div>

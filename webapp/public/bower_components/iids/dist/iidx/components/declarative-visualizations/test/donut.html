@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../css/iidx-declarative-visualizations.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div data-visualization="donut" data-duration="1000" data-source='[["Fuel", 70.3], ["Capital Allocation", 19.5], ["Operations & Maintenance", 10.2]]'></div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "../"
+      });
+      require(['declarative-visualizations'], function(visualizations) {
+        $('div[data-visualization="donut"]').each(function(i, element) {
+          var donut = visualizations.donut(element);
+          setInterval(function() {
+            var sources = [
+              '[["Fuel", 70.3], ["Capital Allocation", 19.5], ["Operations & Maintenance", 10.2]]',
+              '[["Fuel", 50], ["Capital Allocation", 20], ["Operations & Maintenance", 30]]',
+              '[["Fuel", 30], ["Capital Allocation", 60], ["Operations & Maintenance", 10]]'
+            ];
+
+            var index = Math.floor(Math.random() * 3);
+
+            $('div[data-visualization="donut"]').attr('data-source', sources[index]);
+
+            // showcasing ability to randomly assign data-label hidden
+            $('div[data-visualization="donut"]').attr('data-labelhidden', Math.random() > .5);
+
+            // donut.rebuild() to refresh all data attributes (like labelhidden above)
+            // donut.update() to just refresh with new source data
+            donut.rebuild();
+          }, 2000);
+        });
+      });
+    </script>
+
+  </body>
+</html>

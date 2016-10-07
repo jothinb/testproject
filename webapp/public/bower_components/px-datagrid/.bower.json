@@ -1,0 +1,28 @@
+{
+  "name": "px-datagrid",
+  "authors": [
+    "Predix Experience team"
+  ],
+  "description": "The official Predix Experience datagrid",
+  "main": "main.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "predix",
+    "datagrid"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "spec"
+  ],
+  "_release": "dcfe021a65",
+  "_resolution": {
+    "type": "branch",
+    "branch": "14.3E",
+    "commit": "dcfe021a6506e027de53d6720bb7304caaec760e"
+  },
+  "_source": "git://github.sw.ge.com/PredixWidgetCatalog/px-datagrid.git",
+  "_target": "14.3E",
+  "_originalSource": "git://github.sw.ge.com/PredixWidgetCatalog/px-datagrid.git"
+}

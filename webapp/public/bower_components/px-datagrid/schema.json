@@ -1,0 +1,18 @@
+{
+    "id": "px-datagrid",
+    "name": "Datagrid",
+    "type": "datagrid",
+    "schema": {
+        "type": "object",
+        "properties": {
+            "title": {
+                "type": "string",
+                "title": "Title"
+            }
+        },
+        "required": ["title"]
+    },
+    "defaultOptions": {
+        "title": "Datagrid"
+    }
+}

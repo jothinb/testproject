@@ -1,0 +1,1 @@
+define(['./widget-configurator-directive', './widget-configurator-controller', './widget-configurator-service'], function() {});

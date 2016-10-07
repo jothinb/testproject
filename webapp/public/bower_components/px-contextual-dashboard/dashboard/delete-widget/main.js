@@ -1,0 +1,1 @@
+define(["./delete-widget-directive", "./delete-widget-service"], function(){});

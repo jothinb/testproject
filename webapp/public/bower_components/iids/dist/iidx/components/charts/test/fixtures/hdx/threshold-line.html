@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />    
+     <link href="base/css/hdx-charts.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div id="threshold-line-chart" class="chart threshold-bar"></div>
+
+    <script src="base/components/requirejs/require.js"></script>
+    <script src="base/js/hdx-require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "/base/"
+      });
+      require(['jquery','charts'], function($,charts) {
+        var thresholdLineChartConfig = {
+          title: { text: 'Monthly Average Temperature' },
+          subtitle: { text: 'Source: <a href="http://WorldClimate.com">WorldClimate.com</a>' },
+          series: [{
+            name: 'Tokyo',
+            data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+          }, {
+            name: 'London',
+            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+          }],
+          xAxis: {
+            title: {
+              text: 'Month'
+            },
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+          },
+          yAxis: {
+            title: {
+              text: 'Temperature (°C)'
+            },
+            plotLines: [{
+		          color: $(".threshold-bar").css('color'),
+		          dashStyle: 'Dash',
+		          label: {
+		            text: 'Limit', //label for threashold bar line.
+		            align: 'left',
+		            textAlign: 'right',
+		            x: -14,
+		            y: 3,
+		            style: {
+		              fontSize: $(".threshold-bar").css('font-size')
+		            }
+		          },
+		          width: 1,
+		          value: 22 // threshold value
+		        }],
+  		      plotOptions: {
+  		        series: {
+  		          borderWidth: 0,
+  		          pointPadding: 0.25,
+  		          colorByPoint: true,
+  		        },
+  		      },
+          }
+        };
+        charts.line('threshold-line-chart', thresholdLineChartConfig);
+      });
+    </script>
+
+  </body>
+</html>

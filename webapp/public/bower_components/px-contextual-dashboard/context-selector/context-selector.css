@@ -1,0 +1,30 @@
+#context-browser-dropdown h2 {
+  font-size: 26px;
+  line-height: 1;
+}
+
+#context-browser-dropdown h2 [class^="icon-"],
+#context-browser-dropdown h2 [class*=" icon-"] {
+  margin-top: .5em;
+  margin-left: .25em;
+  font-size: .5em;
+}
+
+.px-dropdown {
+  cursor: pointer;
+}
+
+.px-dropdown-menu {
+  margin-top: 31px;
+  margin-left: 0;
+  padding: 0;
+}
+
+.breadcrumbs {
+  font-size: 15px;
+  text-align: left;
+}
+
+.context-browser-disabled {
+  cursor: default;
+}

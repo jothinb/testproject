@@ -1,0 +1,82 @@
+<div class="wrapper">
+    <!-- filter -->
+    <div class="row">
+        <div class="col-md-9 col-sm-7">
+            <h3 class="datagrid-title">{{title}}</h3>
+        </div>
+        <div class="col-md-3 col-sm-5 pull-right">
+            <form class="form-inline" ng-show="showSearch">
+                <div class="input-group">
+                    <input type="text" class="form-control search-query" ng-model="searchText">
+                    <span class="input-group-btn">
+                        <button class="btn btn-icon"><i class="icon-search"></i></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- main grid -->
+    <table class="table dataTable" ng-class="tableClass">
+        <thead>
+            <th ng-repeat="f in columns" ng-click="onColumnHeaderClick($index)" ng-class="getHeaderClass($index)">{{f.label}}</th>
+            <th ng-if="editInPlace"><button class="btn" ng-click="onAddButtonClick()">+</button></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in filtered" ng-init="current = x" ng-click="_onRowClick(x)" ng-class="trClass">
+                <td ng-class="tdClass" ng-repeat="f in columns">
+                    <span ng-if="!current.selected">{{current[f.field]}}</span>
+                    <div ng-if="editInPlace && current.selected">
+                        <input ng-model="current[f.field]" ng-show="!f.options" type="{{f.inputType}}" 
+                        size="{{f.inputSize}}" style="width:auto;"/>
+                        <select ng-if="f.options" style="width:auto;" ng-model="current[f.field]" ng-options="o.option as o.label for o in f.options"></select>
+                    </div>
+                </td>
+                <td ng-if="editInPlace">
+                    <button class="btn" ng-hide="current.selected" ng-click="onRowDelete({item: current}); $event.stopPropagation()">X</button>
+                    <button class="btn" ng-show="current.selected" ng-click="_onRowUpdate(current); $event.stopPropagation()">S</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="table-controls">
+        <!-- numeration -->
+        <div class="pull-left">
+            <div class="dataTables_length">
+            <label>
+            Show
+            <select size="1" ng-model="itemsPerPage" ng-options="value for value in pageLengths">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            </select>
+            entries
+            </label>
+            </div>
+        </div>
+
+        <!-- pagination -->
+        <div class="pull-right" ng-if="(tableData | filter:searchText).length > 0">
+                <div class="dataTables_info">
+                    <strong>{{(currentPage-1)*itemsPerPage + 1}}</strong>
+                    &nbsp;-&nbsp;
+                    <!-- Note the two possibilities here, depending on whether you are on the last page or not -->
+                    <strong ng-if="currentPage < numPages">{{(currentPage)*itemsPerPage}}</strong>
+                    <strong ng-if="currentPage === numPages">{{(tableData | filter:searchText).length}}</strong>
+                    &nbsp;of&nbsp;
+                    <strong>{{(tableData | filter:searchText).length}}</strong>
+                </div>
+                <!-- angular-ui bootstrap pagination directive -->
+                <div class="dataTables_paginate paging_bootstrap" pagination 
+                total-items="(tableData | filter:searchText).length"
+                items-per-page="itemsPerPage"
+                num-pages="numPages"
+                max-size="6"
+                next-text="&gt;"
+                on-select-page="setPage(page)"
+                previous-text="&lt;"
+                page="currentPage">
+                </div>
+        </div>
+    </div>
+</div>

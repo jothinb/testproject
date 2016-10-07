@@ -1,0 +1,16 @@
+<span ng-if="editModeControls.isDisplayed()">
+    <button class="btn btn-icon" id="enter-edit-mode-btn" ng-click="editModeControls.enterEditMode()" ng-if="!editModeControls.isInEditMode()">
+        <i class="icon-ico_edit_sm"></i>
+    </button>
+    <div ng-if="editModeControls.isInEditMode()">
+        <button id="delete-view-btn" class="btn btn-icon" data-toggle="modal" data-target="#view-deleter" ng-disabled="editModeControls.isSavingView">
+            <i class="icon-ico_delete_sm"></i>
+        </button>
+        <button id="edit-view-btn" class="btn btn-icon" ng-click="editModeControls.openViewEditor()" ng-disabled="editModeControls.isSavingView">
+                <i class="icon-ico_settings1_sm"></i>
+        </button>
+        <button class="btn" id="revert-view-btn" ng-click="editModeControls.cancelChanges()" ng-disabled="editModeControls.isSavingView">{{"dashboard.editmode.revert" | vmessages}}</button>
+        <button class="btn btn-primary" id="save-view-btn" 
+                ng-click="editModeControls.saveChanges()" ng-disabled="editModeControls.isSavingView">{{"dashboard.editmode.save" | vmessages}}</button>
+    </div>
+</span>

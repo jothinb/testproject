@@ -1,0 +1,42 @@
+[
+    {
+        "name": "nothing",
+        "identifier": "001-2-2-1-1",
+        "category": "/part/c2z-McGhT8iC0Gn-kdh96w",
+        "nodeIdentifier": "001-2-2-1-1",
+        "hasChildren": true,
+        "entity": true,
+        "entityType": "level221a",
+        "category": "level221"
+    },
+    {
+        "name": "nothing2",
+        "identifier": "001-2-2-1-1",
+        "category": "/part/c2z-McGhT8iC0Gn-kdh96w",
+        "nodeIdentifier": "001-2-2-1-1",
+        "hasChildren": true,
+        "entity": true,
+        "entityType": "level221b",
+        "category": "level221"
+    },
+    {
+        "name": "nothing3",
+        "identifier": "001-2-2-1-1",
+        "category": "/part/c2z-McGhT8iC0Gn-kdh96w",
+        "nodeIdentifier": "001-2-2-1-1",
+        "hasChildren": true,
+        "entity": true,
+        "entityType": "level221c",
+        "category": "level221"
+    },
+    {
+        "name": "oneview",
+        "identifier": "001-2-2-1-2",
+        "category": "/part/c2z-McGhT8iC0Gn-kdh96w",
+        "nodeIdentifier": "001-2-2-1-2",
+        "hasChildren": true,
+        "entity": true,
+        "entityType": "level221d",
+        "category": "level221"
+    }
+]

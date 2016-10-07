@@ -1,0 +1,124 @@
+#context-browser-dropdown-menu, #breadcrumbs {
+  font-family: "GE Sans", "ge-sans", "GE Inspira", "ge-inspira", Helvetica, Arial, sans-serif;
+}
+
+#context-browser-dropdown-menu .module {
+    width: 522px;
+    height: 306px;
+    padding: 0;
+    color: rgb(134,134,134); /* @gray */
+    background-color: rgb(20,20,20); /* @black */
+}
+
+#context-browser-dropdown-menu .px-tree-nav {
+    overflow-x: auto;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 29px;
+    background-color: rgb(65,65,65); /* @grayDarker */
+}
+
+#context-browser-dropdown-menu .px-tree-breadcrumbs,
+#context-browser-dropdown-menu .px-tree-search {
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: rgb(43,43,43); /* @greyDarkest */
+}
+
+#context-browser-dropdown-menu .px-tree-breadcrumbs {
+    height: 29px; }
+
+#context-browser-dropdown-menu .px-tree-level {
+    float: left;
+    overflow-y: scroll;
+    width: 174px;
+    height: 225px;
+}
+
+#context-browser-dropdown-menu .px-tree-level:last-child {
+    padding-right: 0;
+}
+
+#context-browser-dropdown-menu .px-tree-level::-webkit-scrollbar {
+    width: 6px;
+}
+
+#context-browser-dropdown-menu .px-tree-level::-webkit-scrollbar-track {
+    background-color: rgb(43,43,43); /* @greyDarkest */
+}
+
+#context-browser-dropdown-menu .px-tree-level::-webkit-scrollbar-thumb {
+    border: solid transparent;
+    border-width: 0 2px;
+    background-clip: content-box;
+    background-color: rgb(134,134,134); /* @gray */
+}
+
+#context-browser-dropdown-menu .px-tree-level {
+  scrollbar-base-color: rgb(43,43,43);
+  scrollbar-face-color: rgb(134,134,134);
+}
+
+#context-browser-dropdown-menu table {
+    table-layout: fixed;
+    margin-bottom: 0;
+}
+
+#context-browser-dropdown-menu th {
+    padding: 0;
+    background-color: transparent;
+}
+
+#context-browser-dropdown-menu .table > tbody > tr > td {
+    overflow: hidden;
+    position: relative;
+    border-top: 0;
+    padding: 0 5px 0 10px;
+    line-height: 31px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgb(212,212,212); /* @grayLighter */
+}
+
+#context-browser-dropdown-menu .table > tbody > tr > td i {
+    position: absolute;
+    right: 5px;
+    top: 0;
+}
+
+#context-browser-dropdown-menu .table > tbody > tr > .active {
+    color: rgb(255,255,255); /* @white */
+    background-color: rgb(0,92,185); /* @blue */
+}
+
+#context-browser-dropdown-menu .table > tbody.empty {
+    color: #868686;
+}
+
+#context-browser-dropdown-menu .table > tbody.empty > tr,
+#context-browser-dropdown-menu .table > tbody.empty > tr > td {
+    color: inherit;
+}
+
+#context-browser-dropdown-menu [class^="icon-"],
+#context-browser-dropdown-menu [class*=" icon-"] {
+    font-size: .75em;
+    line-height: 29px;
+}
+
+#context-browser-dropdown-menu .px-tree-open-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border-color: rgb(65,65,65); /* @grayDarker */
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 13px;
+    color: rgb(188,188,188); /* @grayLight */
+    background-color: rgb(20,20,20); /* @black */
+}
+
+context-browser li.selected > a {
+    background-color: #0057af;
+    color: #fff;
+}

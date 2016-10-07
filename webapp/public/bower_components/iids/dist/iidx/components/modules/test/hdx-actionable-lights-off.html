@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../css/hdx-modules-lights-off.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="well">
+      <section class="module actionable">
+        <header class="module-header">
+          <div class="btn-group pull-right">
+            <button class="btn dropdown-toggle btn-mini" data-toggle="dropdown"><i class="icon-chevron-down"></i></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+          Header
+        </header>
+        <div class="module-body">Body</div>
+        <footer class="module-footer">Footer</footer>
+      </section>
+    </div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "../"
+      });
+      require(['ge-bootstrap']);
+    </script>
+
+  </body>
+</html>

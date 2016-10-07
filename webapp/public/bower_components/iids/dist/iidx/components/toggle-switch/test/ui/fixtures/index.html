@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <title>Toggle Switch Component</title>
+  <meta charset="utf8">
+
+    <!-- used by local runs, will 404 from with the IIDx -->
+    <link href="../../../src/css/toggle-switch.css" rel="stylesheet">
+
+    <!-- used by runs from within the IIDx, will 404 locally -->
+    <link href="/css/iids.css" rel="stylesheet">
+
+  <!--[if IE 9]>
+
+  <![endif]-->
+</head>
+<body>
+
+
+<div>
+    <label class="checkbox">
+
+
+    <input type="checkbox" value="Yes" data-toggle-switch="true" />
+        Default size
+    </label>
+</div>
+
+<div style="margin-top:150px;">
+    <label class="checkbox">
+
+        <input type="checkbox" value="Yes" disabled="true" data-toggle-switch="true"/>
+        Disabled
+
+    </label>
+</div>
+
+<div style="margin-top:150px;">
+    <label class="checkbox">
+
+    <input type="checkbox" value="Yes" class="switch-large" data-toggle-switch="true"/>
+        Large size
+
+    </label>
+</div>
+
+<div style="margin-top:150px;">
+    <label class="checkbox">
+        Small size
+    </label>
+    <input type="checkbox" value="Yes" class="switch-small"/>
+</div>
+
+<button onclick="$('input.switch-small').toggleSwitch(); this.disabled=true">Instance small switch via JavaScript</button>
+
+<div style="margin-top:150px;">
+    <label class="checkbox">
+        Mini size
+    </label>
+    <input type="checkbox" value="Yes" class="switch-mini"/>
+</div>
+
+
+<button onclick="$('input.switch-mini').toggleSwitch(); this.disabled=true">Instance mini switche via JavaScript</button>
+
+
+
+<!-- used by local runs, will 404 from with the IIDx -->
+<script src="../../../components/requirejs/require.js"></script>
+<script src="../../require.config.js"></script>
+
+<!-- used by runs from within the IIDx, will 404 locally -->
+<script src="/components/requirejs/require.js"></script>
+<script src="/js/require.config.js"></script>
+<script>
+    requirejs.config({
+        baseUrl: "/"
+    });
+</script>
+    <script type="text/javascript">
+        require([
+          'jquery',
+          'toggle-switch'
+          ], function ($) {
+
+          });
+    </script>
+</body>
+</html>

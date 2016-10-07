@@ -1,0 +1,56 @@
+
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET                                                          /                                     controllers.ApplicationController.index()
+
+# Routes specific to the configurable dashboard (mock data)
+GET                                                          /mockhelloworld                       controllers.DashboardController.getMockHelloWorldData()
+GET                                                          /mockdatagrid                         controllers.DashboardController.getMockDatagridData()
+GET                                                          /mocktimeseries                       controllers.DashboardController.getMockTimeSeriesData()
+GET                                                          /mockdatagrid2                        controllers.DashboardController.getMockDatagridData2()
+GET                                                          /mocktimeseries2                      controllers.DashboardController.getMockTimeSeriesData2()
+GET                                                          /echo                                 controllers.EchoController.echo()
+
+GET                              /service/readerApp/EntityTree/node/:id/children                   controllers.DashboardController.getContextTree(id)
+GET                              /service/readerApp/Entity/:id/metadata                            controllers.DashboardController.getContextMetadata(id)
+GET                              /service/appConfig/app/1/context/:contextId/collections           controllers.DashboardController.getView(contextId)
+POST                             /service/appConfig/app/1/context/:contextId/collections           controllers.DashboardController.createView(contextId)
+PUT                              /service/appConfig/app/1/context/:contextId/collections/:viewId   controllers.DashboardController.updateView(contextId, viewId)
+DELETE                           /service/appConfig/app/1/context/:contextId/collections/:viewId   controllers.DashboardController.deleteView(contextId, viewId)
+
+# Overriding Predix proxy route so you can enable/disable authentication in your controller
+GET                                                          /api/v2/proxy                         controllers.ApplicationController.getProxy()
+POST                                                         /api/v2/proxy                         controllers.ApplicationController.postProxy()
+PUT                                                          /api/v2/proxy                         controllers.ApplicationController.putProxy()
+DELETE                                                       /api/v2/proxy                         controllers.ApplicationController.deleteProxy()
+GET                                                          /api/v2/websocket                     controllers.ApplicationController.webSocket()
+
+# Predix authentication routes - don't touch!
+GET    /login                                controllers.Authentication.login(applicationName:String?= "", message:String ?= "")
+POST   /login/:applicationName               controllers.Authentication.authenticate(applicationName:String)
+GET    /logout              controllers.Authentication.logout()
+
+# Uploading multipart/form-data example
+#POST                                                         /upload                               controllers.ApplicationController.upload()
+
+# Ingestion & Consumption Service URLs
+POST                                                         /api/v2/:service/upload                     	controllers.ApplicationController.upload(service)
+#POST                                                         /api/v2/:service/getmetadata                   controllers.ApplicationController.callPostService(service, uri: String)
+#POST                                                         /api/v2/:service/uploaddb                   controllers.ApplicationController.callPostService(service, uri: String)
+GET 		/api/v2/:service/*uri																controllers.ApplicationController.callGetService(service, uri: String)
+POST 		/api/v2/:service/*uri																controllers.ApplicationController.callPostService(service, uri: String)
+
+# Delegate to Predix routes for some basic non-authenticated routes (messages, getUTC, changeLocale)
+->                                                           /                                     predixvapplication.Routes
+
+# Map static resources from the /public folder to the /assets URL path
+GET                                                          /assets/*file                         controllers.Assets.at(path="/public", file)
+
+# Client Routes
+GET                                                          /images/*file                         controllers.Assets.at(path="/public/images", file)
+GET                                                          /stylesheets/*file                    controllers.Assets.at(path="/public/stylesheets", file)
+GET                                                          /scripts/*file                        controllers.Assets.at(path="/public/scripts", file)
+GET                                                          /bower_components/*file               controllers.Assets.at(path="/public/bower_components", file)

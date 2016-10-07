@@ -1,0 +1,213 @@
+<div id="yard-container">
+	<style>
+
+		#compass  {
+			width: 200px;
+			height: 200px;
+			background-color: #fff; /* or transparent; will show through only if renderer alpha: true */
+			border: 1px solid black; /* or none; */
+			margin: 20px;
+			padding: 0px;
+			position: absolute;
+			left: 0px;
+			top: 50%;
+			z-index: 100;
+		}
+        #dat-gui {
+			/*width: 245px;*/
+			/*height: 112px;*/
+			/*bottom: 0px;*/
+			/*right: 0px;*/
+			/*z-index: 100;*/
+			/*top: 60px;*/
+        }
+
+		/*.minimap {*/
+			/*position: absolute;*/
+			/*left: 0px;*/
+			/*bottom: 0px;*/
+		/*}*/
+		.svg .canvas {
+			position: absolute;
+			left: 0px;
+			bottom: 0px;
+		}
+
+		.canvas .wrapper.outer > .background {
+			fill: #000000;
+		}
+		.canvas .wrapper.inner > .background {
+			fill: #CCCCCC;
+			cursor: move;
+		}
+		.canvas .background {
+			fill: #F6F6F6;
+			stroke: #333333;
+			cursor: move;
+		}
+		.canvas .panCanvas {
+			cursor: move;
+		}
+
+		.canvas .minimap .frame .background {
+			stroke: #ffffff;
+			stroke-width: 4px;
+			fill-opacity: 0.4;
+			fill: #ffffff;
+			/*fill: url(#minimapGradient);*/
+			/*filter: url(#minimapDropShadow);*/
+			cursor: move;
+		}
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        #quickSearch > label {
+            color: #fff;
+            margin-left: 7px;
+        }
+        #info-panel {
+            background-color: rgba(20,20,20,0.8);
+            position:absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .maximized-height {
+            height: 200px;
+        }
+        .minimized-height {
+            height: 10px;
+        }
+        .maximized-bottom {
+            bottom: 90px;
+        }
+        .minimized-bottom {
+            bottom: 10px;
+        }
+        .icon-chevron-left {
+            color: #fff;
+            margin:49px 33px 0 0;
+        }
+        .icon-chevron-right {
+            color: #fff;
+            margin:46px 0 0 27px;
+            display: block;
+        }
+	</style>
+
+	<div id="world-container"
+		 ng-mouseleave="onMouseLeave($event)"
+		 ng-click="yardMouseClick($event)"
+		 ng-mousedown="yardMouseDown($event)"
+		 ng-mousemove="yardMouseMove($event)"
+		 ng-mouseup="yardMouseUp($event)">
+			<br /><br /><br /><br /><br />Generating...
+	</div>
+
+	<!--<div id="compass" ng-show="showGyro"></div>-->
+	<!--<div id="dat-gui" ng-show="showDatGui"></div>-->
+
+</div>
+<div id="quickSearch" ng-show="isShowQuickSearch">
+    <form class="form-search">
+        <div class="input-append" style="display: inline;">
+            <input type="text" ng-model="selected" typeahead="result as result.NAME for result in searchList | filter:{NAME:$viewValue} | limitTo:8" typeahead-on-select="onSelect($item,$model,$label)">
+            <button type="submit" class="btn btn-icon" style="margin-left:-3px;" ng-click="getList()"><i class="icon-search"></i></button>
+			<span><img ng-src="/oasis/images/kpi/GE-Oasis-UI_150dpi_container-kpi.png" class="kpiIconImg1"></span>
+			<span><img ng-src="/oasis/images/kpi/GE-Oasis-UI_150dpi_gate-kpi.png" class="kpiIconImg"></span>
+			<span ng-show="!highlightTruckKPI" ng-mousedown="highlightTruckKPI = true" ><img ng-src="/oasis/images/kpi/GE-Oasis-UI_150dpi_truck-kpi.png" class="kpiIconImg cursorPointer"></span>
+			<span ng-show="highlightTruckKPI"><img ng-src="/oasis/images/kpi/GE-Oasis-UI_150dpi_truck-kpiRO.png" class="kpiIconImg"></span>
+			<span><img ng-src="/oasis/images/kpi/GE-Oasis-UI_150dpi_lift-kpi.png" class="kpiIconImg"></span>
+			<span><img ng-src="/oasis/images/kpi/GE-Oasis-UI_150dpi_train-kpi.png" class="kpiIconImg"></span>
+		</div>
+    </form>
+    <!--<label><input type="radio" ng-model="searchType" value="TRAINID"/>TrainId</label>-->
+</div>
+
+<span ng-show="highlightTruckKPI" class="kpiChart">
+	<img ng-src="/oasis/images/kpi/GE-Oasis-UI_150dpi_truck-chart.png" class="kpiChartImg">
+</span>
+
+<results-pane></results-pane>
+
+<span ng-show="selectedCrane" style="height: 420px; position: absolute; top: 140px; right: 40px;">
+	<img ng-src="/oasis/images/GE_OASIS_WO.png" style="max-width:100%; max-height: 100%;" >
+</span>
+<!-- Probably need a slightly different image than the one above. -->
+<span ng-show="selectedHostler" style="height: 420px; position: absolute; top: 140px; right: 40px;">
+	<img ng-src="/oasis/images/GE_OASIS_WO2.png" style="max-width:100%; max-height: 100%;" >
+</span>
+
+<!--<div ng-repeat="selected in userSelectedContainers"><select-details selected="selected"></select-details></div>-->
+<div ng-show="smallCardInfo" class="containerSearchResult" style="padding:10px 10px 0px 10px">
+    <span class="dismissSearchResults"><i class="icon-remove-circle" ng-click="dismissResults($event)"></i></span>
+    <div style="max-height:365px;overflow:auto">
+        <div ng-repeat="item in smallCardInfo">
+            <!--<small-card info="item.containerData"></small-card>-->
+			<medium-card info="item.containerData"></medium-card><br><hr style="margin:0;">
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="info-panel" ng-class="{'maximized-height':!isCollapsed, 'minimized-height':isCollapsed}">
+	<mini-map w="2048" h="512" zoom-scale="0.75" style="height: 72px; position:absolute;top:-82px; right:40px;"></mini-map>
+
+	<span class="collapseDrawer" style="height: 35px; width: 55px; position:absolute;left:50%; top:-29px;"
+		  ng-class="{'maximized-bottom':!isCollapsed}" ng-click="isCollapsed = !isCollapsed">
+		<img style="max-width:100%; max-height: 100%" ng-src="/oasis/images/drawer-pull-{{isCollapsed ? 'up' : 'down'}}.png">
+	</span>
+
+	<!--<div class="pull-left icon-container"><div class="icon-chevron-left pull-right" ng-click="previous()"></div></div>-->
+	<!--<info-panel></info-panel>-->
+	<span class="expandedDrawer">
+		<span id="drawerLeftBtn">&lt;</span>
+		<img id="trainsCard" class="drawerCard" src="/oasis/images/trains-card.png" />
+		<img id="gatesCard" class="drawerCard" src="/oasis/images/gates-card.png" />
+		<img id="inventoryCard" class="drawerCard" src="/oasis/images/inventory-card.png" />
+		<img id="liftsCard" class="drawerCard" src="/oasis/images/lifts-card.png" />
+		<span id="drawerRightBtn">&gt;</span>
+	</span>
+	<!--<div class="pull-left icon-container"><div class="icon-chevron-right" ng-click="next()"></div></div>-->
+</div>
+
+
+
+
+<div class="module" ng-show="containerData" ng-style="{'width': '15%','padding':'5px 5px 0px 5px', 'position':'absolute', 'top': xAxis+'px', 'left': yAxis+'px'}">
+    <div ng-repeat="item in containerData" style="margin-bottom:2px;">
+        <small-card info="item.containerData"></small-card>
+    </div>
+</div>
+<div ng-controller="ContainerAccordionCtrl" style="display: none; position: absolute; top:80px; left: 70%; background-color: #FFF8DC">
+    <!--<p>-->
+        <!--<button class="btn btn-default btn-sm" ng-click="status.open = !status.open">Toggle last panel</button>-->
+        <!--<button class="btn btn-default btn-sm" ng-click="status.isFirstDisabled = ! status.isFirstDisabled">Enable / Disable first panel</button>-->
+    <!--</p>-->
+
+    <label class="checkbox">
+        <input type="checkbox" ng-model="oneAtATime">
+        Open only one at a time
+    </label>
+    <accordion close-others="oneAtATime">
+        <accordion-group heading="{{unit.unitInit}}-{{unit.unitNbr}}  {{unit.sizeCode}}  Dest: {{unit.destName}} Shipper: {{unit.shprName}}" ng-repeat="unit in unitData">
+            <table>
+                <tr>
+                    <td>{{unit.unitInit}}</td>
+                    <td>{{unit.unitNbr}}</td>
+                </tr>
+                <tr>OUTBOUND COFC LOAD </tr>
+                <tr>WBILL: {{unit.waybillId}}                      Current in Yard: {{unit.invStatus}}</tr>
+                <tr>Arr Time: {{unit.arvlTime}}                    Size Code: {{unit.sizeCode}}                       AAR Code: {{unit.aarCode}}</tr>
+            </table>
+        </accordion-group>
+    </accordion>
+</div>
+
+
+
+
+
+
+

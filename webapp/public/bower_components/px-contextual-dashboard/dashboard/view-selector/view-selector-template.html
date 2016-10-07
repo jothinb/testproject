@@ -1,0 +1,18 @@
+<div class="btn-group" ng-if="viewSelector.isDisplayed()">
+    <button id="view-selector-dropdown-btn" class="btn dropdown-toggle" ng-class="{disabled: viewSelector.isDisabled()}"
+            data-toggle="dropdown">
+        {{viewSelector.getCurrentViewName()}} <i class="icon-chevron-down"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-right">
+        <li class="view-selector-item" ng-repeat="view in viewSelector.getViewList()"
+            ng-click="viewSelector.selectView(view)">
+                <a>{{view.name}}</a>
+        </li>
+        <li class="divider"></li>
+        <li id="view-selector-create-view-btn">
+            <a data-toggle="modal" data-target="#view-creator">
+                {{"dashboard.view.add" | vmessages}}
+            </a>
+        </li>
+    </ul>
+</div>

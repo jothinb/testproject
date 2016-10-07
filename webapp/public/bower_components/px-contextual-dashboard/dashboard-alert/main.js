@@ -1,0 +1,1 @@
+define(['./dashboard-alert-service','./dashboard-alert-controller','./dashboard-alert-directive'], function() {});

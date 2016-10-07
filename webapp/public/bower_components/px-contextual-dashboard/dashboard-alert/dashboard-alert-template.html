@@ -1,0 +1,4 @@
+<div id="dashboardAlert" class='alert alert-fixed-top alert-error' data-ng-show="dashboardAlertController.getAlerts().length">
+    <button type='button' class='close' ng-click='dashboardAlertController.close()'>&times;</button>
+    <div ng-repeat="alert in dashboardAlertController.getAlerts()">{{alert.msg}}</div>
+</div>

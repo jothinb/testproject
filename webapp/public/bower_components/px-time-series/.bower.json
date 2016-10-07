@@ -1,0 +1,29 @@
+{
+  "name": "px-time-series",
+  "authors": [
+    "Predix Experience team"
+  ],
+  "description": "The official Predix Experience time series chart",
+  "main": "main.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "predix",
+    "time",
+    "series"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "spec"
+  ],
+  "_release": "408a290285",
+  "_resolution": {
+    "type": "branch",
+    "branch": "14.3E",
+    "commit": "408a2902853845d175acb0592142bf2354b5ef50"
+  },
+  "_source": "git://github.sw.ge.com/PredixWidgetCatalog/px-time-series.git",
+  "_target": "14.3E",
+  "_originalSource": "git://github.sw.ge.com/PredixWidgetCatalog/px-time-series.git"
+}

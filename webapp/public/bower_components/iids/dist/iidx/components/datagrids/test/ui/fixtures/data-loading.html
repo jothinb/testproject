@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DataGrids Test Fixture</title>
+
+        <!-- used by local runs, will 404 from with the IIDx -->
+        <link href="../../../css/iidx-datagrids.css" rel="stylesheet" type="text/css">
+        <link href="../../../css/iidx-responsive.css" rel="stylesheet" type="text/css">
+
+        <!-- used by runs from within the IIDx, will 404 locally -->
+        <link href="/css/iids.css" rel="stylesheet">
+
+        <style>
+            p {
+                clear: both;
+                margin: 100px 0 10px 5px;
+                font-weight:bold;
+                border-bottom: 1px solid black;
+            }
+
+            p:first-of-type {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Loading data from existing table DOM.</p>
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered"
+               data-table-name="dt-dom">
+            <thead>
+                <tr>
+                    <th class="essential">Foo</th>
+                    <th class="essential">Bar</th>
+                    <th class="essential">Baz</th>
+                    <th class="optional">Qux</th>
+                    <th>Bop</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hello1</td>
+                    <td>Hello2</td>
+                    <td>Hello3</td>
+                    <td>Hello4</td>
+                    <td>Hello5</td>
+                </tr>
+                <tr>
+                    <td>Snow1</td>
+                    <td>Snow2</td>
+                    <td class="outlier">Snow3</td>
+                    <td>Snow4</td>
+                    <td>Snow5</td>
+                </tr>
+                <tr>
+                    <td>Zerp1</td>
+                    <td>Zerp2</td>
+                    <td>Zerp3</td>
+                    <td>Zerp4</td>
+                    <td>Zerp5</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+        <p>Loading data from Array.</p>
+
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" data-table-name="dt-array">
+
+        </table>
+
+
+
+        <p>Loading data from Ajax JSON object array.</p>
+
+        <button onclick="reloadData()">Reload</button>
+
+        <script>
+            function reloadData() {
+                var instance = $('table[data-table-name="dt-ajax-objects"]').data('iidsBasicDataGrid');
+                instance.reloadAjax(instance.$table.fnSettings(), "./data/ao.browsers_modified.json", null, null);
+            }
+        </script>
+
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" data-table-name="dt-ajax-objects">
+
+        </table>
+
+
+
+
+        <p>Loading data from Ajax JSON array of arrays.</p>
+
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" data-table-name="dt-ajax-array">
+
+        </table>
+
+
+        <!-- used by local runs, will 404 from with the IIDx -->
+        <script src="../../../components/requirejs/require.js"></script>
+        <script src="../../require.config.js"></script>
+
+        <!-- used by runs from within the IIDx, will 404 locally -->
+        <script src="/components/requirejs/require.js"></script>
+        <script src="/js/require.config.js"></script>
+        <script>
+            requirejs.config({
+                baseUrl: "/"
+            });
+        </script>
+
+        <script type="text/javascript">
+
+            require(['jquery', 'datagrids'], function ($) {
+
+                $(function () {
+
+                    // DOM elements
+                    $('table[data-table-name="dt-dom"]').iidsBasicDataGrid({ 'isResponsive': true });
+
+                    // JavaScript array and columns
+                    $('table[data-table-name="dt-array"]').iidsBasicDataGrid({
+                        'aoColumns': [
+                            { 'sTitle': 'Schedule', 'sClass': 'essential' },
+                            { 'sTitle': 'Account Status', 'sClass': 'essential' },
+                            { 'sTitle': 'DBA Name', 'sClass': 'essential' },
+                            { 'sTitle': 'Customer Info', 'sClass': 'optional' }
+                        ],
+                        'aaData': [
+                            ['foo', 'bar', 'baz', 'bueller'],
+                            ['possum', 'raccoon', 'gravy', 'rabies'],
+                            ['peanut', 'epsilon', 'flapjack', 'nominee']
+                        ],
+                        'isResponsive': true
+                    });
+
+                    // Ajax with DataTables, array of objects
+                    $('table[data-table-name="dt-ajax-objects"]').iidsBasicDataGrid({
+                        'aoColumns': [
+                            { 'sTitle': 'Rendering engine', 'mData': 'engine', 'sClass': 'essential' },
+                            { 'sTitle': 'Browser', 'mData': 'browser', 'sClass': 'essential' },
+                            { 'sTitle': 'Platform(s)', 'mData': 'platform', 'sClass': 'optional' },
+                            { 'sTitle': 'Engine version', 'mData': 'version' },
+                            { 'sTitle': 'CSS grade', 'mData': 'grade', 'sClass': 'essential' }
+                        ],
+                        'sAjaxSource': './data/ao.browsers.json',
+                        'useFloater': false,
+                        'isResponsive': true
+                    });
+
+                    // Ajax with DataTables, array of arrays
+                    $('table[data-table-name="dt-ajax-array"]').iidsBasicDataGrid({
+                        'aoColumns': [
+                            { 'sTitle': 'Rendering engine', 'sClass': 'essential' },
+                            { 'sTitle': 'Browser', 'sClass': 'essential' },
+                            { 'sTitle': 'Platform(s)', 'sClass': 'optional' },
+                            { 'sTitle': 'Engine version' },
+                            { 'sTitle': 'CSS grade', 'sClass': 'essential' }
+                        ],
+                        'sAjaxSource': './data/aa.browsers.json',
+                        'isResponsive': true
+                    });
+
+                });
+            });
+        </script>
+        <script src="../../../components/respond/respond.src.js"></script>
+    </body>
+</html>
+

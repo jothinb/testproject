@@ -1,0 +1,20 @@
+{
+  "name": "px-datagrid",
+  "version": "14.3",
+  "authors": [
+    "Predix Experience team"
+  ],
+  "description": "The official Predix Experience datagrid",
+  "main": "main.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "predix",
+    "datagrid"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "spec"
+  ]
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataGrids Test Fixture</title>
+
+    <link href="../../../css/iidx-datagrids.css" rel="stylesheet" type="text/css">
+    <link href="../../../css/iidx-responsive.css" rel="stylesheet" type="text/css">
+
+    <style>
+        p {
+            clear: both;
+            margin: 20px 0 10px 5px;
+            font-weight: bold;
+            border-bottom: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<p>Column reordering</p>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" data-table-name="col-reorder-example">
+
+</table>
+
+<script src="../../../components/requirejs/require.js"></script>
+<script src="../../require.config.js"></script>
+
+<script type="text/javascript">
+    require(['jquery', 'datagrids', 'datatables-colreorder'], function ($) {
+
+        // Column reordering
+        //From http://datatables.net/release-datatables/extras/ColReorder/index.html
+        $('table[data-table-name="col-reorder-example"]').iidsBasicDataGrid({
+            'aoColumns': [
+                { 'sTitle': 'Schedule', 'sClass': 'essential' },
+                { 'sTitle': 'Account Status', 'sClass': 'essential' },
+                { 'sTitle': 'DBA Name', 'sClass': 'essential' },
+                { 'sTitle': 'Customer Info', 'sClass': 'optional' }
+            ],
+            'aaData': [
+                ['foo', 'bar', 'baz', 'bueller'],
+                ['possum', 'raccoon', 'gravy', 'rabies'],
+                ['peanut', 'epsilon', 'flapjack', 'nominee']
+            ],
+            'plugins': ['R'] //enable the col-reorder plugin (assumes 'col-reorder-amd' is on the page)
+        });
+    });
+</script>
+<script src="../../../components/respond/respond.src.js"></script>
+</body>
+</html>

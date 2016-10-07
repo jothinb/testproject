@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>sb-websocket-animate - Animate a cube</title>
+    <script src="libs/three.js"></script>
+    <script src="libs/dat.gui.min.js"></script>
+    <script src="libs/stats.min.js"></script>
+    <script src="libs/tween.js"></script>
+    <script src="libs/debugAxes.js"></script>
+    <script src="libs/sockjs-0.3.4.js"></script>
+    <script src="libs/stomp.js"></script>
+    <style>
+        body {
+            /* set margin to 0 and overflow to hidden, to go fullscreen */
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<script>
+	var stompClient = null;
+	
+    /**
+     * Subscribes to server-side WebSocket with a handler to animate the cube based on the movement data.
+     */
+	function connect() {
+		disconnect(); // quick hack to fix double-clicking of connect led to disconnect no longer working
+	    var socket = new SockJS('/hello');
+	    stompClient = Stomp.over(socket);
+	    stompClient.connect({}, function(frame) {
+	        stompClient.send("/app/publish", {});
+	        stompClient.subscribe('/topic/simplemove', function(data) {
+	        	var time = 500;
+	        	var simpleMove = JSON.parse(data.body);
+	        	var cube = scene.getObjectByName('cube');
+	        	var start = {
+	        			x: cube.position.x,
+	        			y: cube.position.y,
+	        			z: cube.position.z
+	        	};
+	        	var end = {
+	        		x: start.x,
+	        		y: start.y,
+	        		z: start.z
+	        	};
+	        	switch (simpleMove.direction) {
+	        	case 'right':
+	        		end.x += simpleMove.distance;
+	        		break;
+	        	case 'left':
+	        		end.x -= simpleMove.distance;
+	        		break;
+	        	case 'forward':
+	        		end.z += simpleMove.distance;
+	        		break;
+	        	case 'back':
+	        		end.z -= simpleMove.distance;
+	        		break;
+	        	default:
+	        		throw Error('Unsupported direction: ' + move.direction);
+	        	}
+	        	move(cube, start, end, time);
+	        });
+	        console.log('Connected: ' + frame);
+	    });
+	}
+	
+	function disconnect() {
+	    if (stompClient != null) {
+	        stompClient.disconnect();
+	    }
+	    //console.log("Disconnected");
+	}
+	
+    // global variables
+    var renderer;
+    var scene;
+    var camera;
+    var stats;
+
+    var isTweening = false;
+
+    function createCube() {
+        var cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
+        var cubeMaterial = new THREE.MeshLambertMaterial({color: 0xff0000, transparent: true, opacity: 0.6});
+        var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+        cube.castShadow = true;
+        cube.name = 'cube';
+        cube.geometry.verticesNeedUpdate = true;
+        cube.geometry.normalsNeedUpdate = true;
+//         cubeGeometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, 2, 0));
+        cube.position.y = 2;
+        scene.add(cube);
+        return cube;
+    }
+    
+    /**
+     * Initializes the scene, camera and objects. Called when the window is
+     * loaded by using window.onload (see below)
+     */
+    function init() {
+
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        scene = new THREE.Scene();
+
+        // create a camera, which defines where we're looking at.
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // create a render, sets the background color and the size
+        renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0x000000, 1.0);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMapEnabled = true;
+
+        // create the ground plane
+        var planeGeometry = new THREE.PlaneGeometry(120, 120, 20, 20);
+        var planeMaterial = new THREE.MeshLambertMaterial({color: 0xcccccc});
+        var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        plane.receiveShadow = true;
+
+        // rotate and position the plane
+        plane.rotation.x = -0.5 * Math.PI;
+        plane.position.x = 0;
+        plane.position.y = 0;
+        plane.position.z = 0;
+
+        // add the plane to the scene
+        scene.add(plane);
+        var cube = createCube();
+
+        // position and point the camera to the center of the scene
+        camera.position.x = 35;
+        camera.position.y = 51;
+        camera.position.z = 39;
+        camera.lookAt(scene.position);
+
+        // add spotlight for the shadows
+        var spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.position.set(20, 80, 20);
+        spotLight.shadowCameraNear = 20;
+        spotLight.shadowCameraFar = 150;
+        spotLight.castShadow = true;
+
+        scene.add(spotLight);
+
+        // setup the control object for the control gui
+        var control = new function () {
+            this.opacity = 0.6;
+            var distance = 4.0;
+            var time = 500;
+        	var cube = scene.getObjectByName('cube');
+        	var start = {
+        			x: cube.position.x,
+        			y: cube.position.y,
+        			z: cube.position.z
+        	};
+
+            this.right = function () {
+            	var end = {
+            			x: cube.position.x + distance,
+            			y: cube.position.y,
+            			z: cube.position.z
+            	};
+            	move(cube, start, end, time);
+            };
+            this.left = function () {
+            	var end = {
+            			x: cube.position.x - distance,
+            			y: cube.position.y,
+            			z: cube.position.z
+            	};
+            	move(cube, start, end, time);
+            };
+            this.forward = function () {
+            	var end = {
+            			x: cube.position.x,
+            			y: cube.position.y,
+            			z: cube.position.z + distance
+            	};
+            	move(cube, start, end, time);
+            };
+            this.back = function () {
+            	var end = {
+            			x: cube.position.x,
+            			y: cube.position.y,
+            			z: cube.position.z - distance
+            	};
+            	move(cube, start, end, time);
+            };
+            this.connect = connect;
+            this.disconnect = disconnect;
+        };
+
+        // add extras
+        addControlGui(control);
+        addStatsObject();
+
+        scene.add(buildAxes(100));
+
+        document.body.appendChild(renderer.domElement);
+        render();
+    }
+
+    function move(cube, start, end, time) {
+        if (!isTweening) {
+            new TWEEN.Tween(start)
+                    .to(end, time )
+                    .easing(TWEEN.Easing.Linear.None)
+                    .onStart(function () {
+                    	isTweening = true;
+                    })
+                    .onUpdate(function () {
+                    	cube.position.x = start.x;
+                    	cube.position.y = start.y;
+                    	cube.position.z = start.z;
+                    })
+                    .onComplete(function () {
+                    	cube.position.x = Math.round(cube.position.x);
+                    	cube.position.y = Math.round(cube.position.y);
+                    	cube.position.z = Math.round(cube.position.z);
+                    	isTweening = false;
+                    })
+                    .start();
+        }
+    }
+    
+    function addControlGui(controlObject) {
+        var gui = new dat.GUI();
+        gui.add(controlObject,'right');
+        gui.add(controlObject,'left');
+        gui.add(controlObject,'forward');
+        gui.add(controlObject,'back');
+        gui.add(controlObject,'connect');
+        gui.add(controlObject,'disconnect');
+    }
+
+    function addStatsObject() {
+        stats = new Stats();
+        stats.setMode(0);
+
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top = '0px';
+
+        document.body.appendChild( stats.domElement );
+    }
+
+    /**
+     * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
+     * for future renders
+     */
+    function render() {
+        stats.update();
+        TWEEN.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+    }
+
+    /**
+     * Function handles the resize event. This make sure the camera and the renderer
+     * are updated at the correct moment.
+     */
+    function handleResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    window.onload = init;
+    window.addEventListener('resize', handleResize, false);
+    
+</script>
+<body onload="disconnect()"></body>
+</html>

@@ -1,0 +1,119 @@
+<div id="widget-selector" class="modal fade">
+    <div class="container">
+        <div class="row">
+            <div class="modal-dialog col-md-8">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <i class="icon-ico_remove_sm"></i>
+                        </button>
+                        <h2 class="modal-title">{{"dashboard.widgetconfig.title" | vmessages}}</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="widget-visualization-panel">
+                            <p>
+                                <strong>{{"dashboard.widgetconfig.choice" | vmessages}}</strong>
+                            </p>
+
+                            <div class="row">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <div class="widget-visualization-choice">
+                                        <label>{{"dashboard.widgetconfig.widget" | vmessages}}</label>
+                                        <select ng-model="widgetConfigurator.selectedWidgetDefinition"
+                                                class="form-control"
+                                                ng-options="widget as widget.name for widget in widgetConfigurator.widgets"
+                                                ng-change="widgetConfigurator.changeWidget()">
+                                            <option value="">{{"dashboard.widgetconfig.widget.choose" | vmessages}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="widget-datasource-choice">
+                                        <label>{{"dashboard.widgetconfig.datasource" | vmessages}}</label>
+                                        <select ng-model="widgetConfigurator.selectedDatasourceDefinition"
+                                                class="form-control"
+                                                ng-options="datasource as datasource.name for datasource in widgetConfigurator.datasources"
+                                                ng-change="widgetConfigurator.changeDatasource()">
+                                            <option value="">{{"dashboard.widgetconfig.datasource.choose" |
+                                                             vmessages}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="widget-visualization-size">
+                                        <label>{{"dashboard.widgetconfig.widget.width" | vmessages}}</label>
+
+                                        <div>
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="radio-inline btn btn-image" id="half-page-button"
+                                                       ng-class="{'btn-image-selected' : widgetConfigurator.isHalfSelected()}">
+                                                    <img src="../../../../images/halfpage.png" alt=""/>
+                                                    <input type="radio" id="halfPage_radio"
+                                                           ng-model="widgetConfigurator.widgetOptions.selectedSize"
+                                                           value="half">
+                                                    <span>{{"dashboard.widgetconfig.widget.width.half" | vmessages}}</span>
+                                                </label>
+                                                <label class="radio-inline btn btn-image" id="full-page-button"
+                                                       ng-class="{'btn-image-selected' : widgetConfigurator.isFullSelected()}">
+                                                    <img src="../../../../images/fullpage.png" alt=""/>
+                                                    <input type="radio" id="fullPage_radio"
+                                                           ng-model="widgetConfigurator.widgetOptions.selectedSize"
+                                                           value="full">
+                                                    <span>{{"dashboard.widgetconfig.widget.width.full" | vmessages}}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-datasource-panel">
+                            <p>
+                                <strong>{{"dashboard.widgetconfig.datasource.settings" | vmessages}}</strong>
+                            </p>
+
+                            <div class="row">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <div class="widget-datasource-parameters"
+                                         ng-show="widgetConfigurator.selectedDatasourceDefinition">
+                                        <label>{{"dashboard.widgetconfig.options" | vmessages}}</label>
+                                        <px-form data-form-name="datasourceForm"
+                                                 data-schema="widgetConfigurator.getDatasourceSchema()"
+                                                 data-model="widgetConfigurator.datasourceOptions"></px-form>
+                                    </div>
+                                    <p class="zero-state"
+                                       ng-hide="widgetConfigurator.selectedDatasourceDefinition">
+                                        {{"dashboard.widgetconfig.datasource.zerostate" | vmessages}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-settings-panel">
+                            <p>
+                                <strong>{{"dashboard.widgetconfig.widget.settings" | vmessages}}</strong>
+                            </p>
+
+                            <div class="row">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <div class="widget-visualization-properties"
+                                         ng-show="widgetConfigurator.selectedWidgetDefinition">
+                                        <px-form data-form-name="widgetForm"
+                                                 data-schema="widgetConfigurator.getWidgetSchema()"
+                                                 data-model="widgetConfigurator.widgetOptions"></px-form>
+                                    </div>
+                                    <p class="zero-state"
+                                       ng-hide="widgetConfigurator.selectedWidgetDefinition">
+                                        {{"dashboard.widgetconfig.widget.zerostate" | vmessages}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal">{{"form.action.close" | vmessages}}
+                        </button>
+                        <button class="btn btn-primary" data-dismiss="modal" ng-click="widgetConfigurator.save()"
+                                ng-disabled="!widgetConfigurator.isValid()">{{"form.action.save" | vmessages}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

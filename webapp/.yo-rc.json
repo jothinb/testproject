@@ -1,0 +1,7 @@
+{
+  "generator-predix-experience": {
+    "appName": "tsoanalytics",
+    "appPlatform": "predix_dashboard",
+    "appUx": "iidx"
+  }
+}

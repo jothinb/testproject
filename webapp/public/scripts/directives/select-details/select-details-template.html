@@ -1,0 +1,18 @@
+<div class="mediumcard">
+	<div class="card-header">
+		<div class="pull-left image-container"><div class="image-style {{getShipperClass(cInfo.shprName)}}"></div></div>
+		<div class="pull-left container-header"><span>{{cInfo.unitInit}}</span><span>{{cInfo.unitNbr}}</span></div>
+		</div>
+	<div class="dimension-info">
+		<div class="weight-icon"></div><span>{{cInfo.wgtNbr}} lbs</span>
+		<span>&lt;--</span><span>{{cInfo.wdthNbr}} ft</span><span>--&gt;</span>
+		</div>
+	<div class="dest-info">
+		<span>{{cInfo.destName}}</span>
+		<div class="pull-right loco-direction"></div>
+		</div>
+	<div class="time-info">
+		<span>{{cInfo.x}}</span><span>{{cInfo.y}}</span><span>{{cInfo.z}}</span>
+		<span class="pull-right">{{cInfo.arvlTime | date:"MM-dd-yyyy HH:MM"}}</span>
+		</div>
+	</div>

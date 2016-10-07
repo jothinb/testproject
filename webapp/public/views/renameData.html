@@ -1,0 +1,21 @@
+
+<div class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+                <h3>Rename Data Set</h3>
+            </div>
+            <div class="modal-body" >
+                <label for="updatedName">New Name *</label>
+                <input type="text" id="updatedName" name="updatedName" ng-model="dataset.updatedName" ng-class="{'errorBorder': (error.duplicateName || error.missingName)}" ng-change="validateNewName(dataset.updatedName)"/>
+                <span ng-if="error.missingName" class="error">New Name is required</span>
+                <span ng-if="error.duplicateName" class="error">This name is already in use</span>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" ng-click="cancel()">Cancel</button>
+                <button class="btn btn-primary" ng-click="updateName()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../css/iidx-declarative-visualizations.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div data-visualization="bar" data-duration="1000" data-max="5000" data-value="3965.20" data-threshold="1000"></div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "../"
+      });
+      require(['declarative-visualizations'], function(visualizations) {
+        $('div[data-visualization="bar"]').each(function(i, element) {
+          var bar = visualizations.bar(element);
+          setInterval(function() {
+            $('div[data-visualization="bar"]').attr('data-value', Math.random() * 5000);
+            bar.update();
+          }, 2000);
+        });
+      });
+    </script>
+
+  </body>
+</html>

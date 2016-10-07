@@ -1,0 +1,171 @@
+[
+    {
+        "id": "mock-datagrid",
+        "name": "MockDatagridDS",
+        "url": "http://localhost:9000/mockdatagrid",
+        "type": "datagrid",
+        "get": {
+            "request": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "dataSet": {
+                            "type": "string",
+                            "title": "Data Set",
+                            "enum": [
+                                "1",
+                                "2"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "dataSet"
+                ],
+                "defaultOptions": {
+                    "dataSet": "1"
+                }
+            },
+            "response": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "tableData": {
+                            "type": "array",
+                            "items": {
+                                "type": "object"
+                            }
+                        },
+                        "columns": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "field": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "inputType": {
+                                        "type": "string"
+                                    },
+                                    "inputSize": {
+                                        "type": "number"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "field",
+                                    "type",
+                                    "inputType",
+                                    "inputSize",
+                                    "label"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "tableData",
+                        "columns"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": "mock-timeseries",
+        "name": "MockTimeSeriesDs",
+        "url": "http://localhost:9000/mocktimeseries",
+        "type": "time-series",
+        "get": {
+            "request": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "timeFrameAmount": {
+                            "type": "number",
+                            "title": "Timeframe amount",
+                            "minimum": 0
+                        },
+                        "timeFrameUnit": {
+                            "type": "string",
+                            "title": "Timeframe unit",
+                            "enum": ["Hours", "Days", "Weeks", "Months", "Years"]
+                        },
+                        "samplingMode": {
+                            "type": "string",
+                            "title": "Sampling mode",
+                            "enum" : ["Rolling average", "Raw"]
+                        },
+                        "samplingRate": {
+                            "type": "string",
+                            "title": "Sampling rate",
+                            "enum": [
+                                "1 second",
+                                "1 minute",
+                                "1 hour",
+                                "4 hours",
+                                "24 hours"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "timeFrameAmount",
+                        "timeFrameUnit",
+                        "samplingMode",
+                        "samplingRate"
+                    ]
+                },
+                "defaultOptions": {
+                    "timeFrameAmount": 4,
+                    "timeFrame": "Hours",
+                    "samplingMode": "Rolling average",
+                    "samplingRate": "1 minute"
+                }
+            },
+            "response": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "series": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "number"
+                                                },
+                                                {
+                                                    "type": "number"
+                                                }
+                                            ],
+                                            "minItems": 2
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "data"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "series"
+                    ]
+                }
+            }
+        }
+    }
+]

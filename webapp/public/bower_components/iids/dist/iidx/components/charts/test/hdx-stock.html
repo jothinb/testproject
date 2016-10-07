@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="../css/hdx-charts.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div id="chart-stock" class="chart"></div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/hdx-require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "../"
+      });
+      require(['charts'], function(charts) {
+        var data = {
+          title: { text: 'Stock Prices' },
+          series: [],
+          rangeSelector: {
+            selected: 5
+          },
+          plotOptions: {
+            series: {
+              compare: 'percent'
+            }
+          },
+          yAxis: {
+            labels: {
+              formatter: function() {
+                return (this.value > 0 ? '+' : '') + this.value + '%';
+              }
+            },
+            title: {
+              text: 'Change'
+            }
+          }
+        };
+        $(function() {
+          $.when(
+            $.getJSON('data/aapl.json'),
+            $.getJSON('data/goog.json'),
+            $.getJSON('data/msft.json')
+          ).done(function (aapl, goog, msft) {
+            data.series.push({name:'AAPL', data:aapl[0]});
+            data.series.push({name:'GOOG', data:goog[0]});
+            data.series.push({name:'MSFT', data:msft[0]});
+            charts.stock(document.getElementById('chart-stock'), data);
+          });
+        });
+      });
+    </script>
+
+  </body>
+</html>

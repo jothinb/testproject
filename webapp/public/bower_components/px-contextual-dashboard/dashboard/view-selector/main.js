@@ -1,0 +1,1 @@
+define(['./view-selector-directive', './view-selector-controller'], function() {});

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Component</title>
+    <meta charset="utf8">
+      <link href="../css/videoplayer.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+
+    <video id="example_video_1" class="video-js vjs-default-skin"
+           controls preload="auto" width="640" height="264"
+           poster="http://video-js.zencoder.com/oceans-clip.png"
+           data-setup>
+        <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
+        <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+        <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+    </video>
+
+
+    <video id="example_video_2" class="video-js vjs-default-skin"
+           controls preload="auto" width="640" height="264"
+           poster="http://video-js.zencoder.com/oceans-clip.png"
+           data-setup>
+        <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
+        <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+        <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+    </video>
+
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        baseUrl: '../'
+      });
+
+      require(["videoplayer"], function () {
+          videojs.options.flash.swf = "js/video-js.swf";
+          videojs('example_video_1', {
+              plugins: {
+                  timetooltip: {}
+              }
+          });
+
+          videojs('example_video_2', {
+              plugins: {
+                  timetooltip: {}
+              }
+          });
+      });
+    </script>
+
+  </body>
+</html>

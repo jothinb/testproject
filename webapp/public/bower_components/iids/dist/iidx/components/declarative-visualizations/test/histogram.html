@@ -1,0 +1,425 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Data Viz - Histogram</title>
+    <meta charset="utf8">
+    <link href="../components/prettify/prettify.css" rel="stylesheet">
+    <link href="../css/iidx-declarative-visualizations.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar navbar-static-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="index.html"><span class="ge-logo"></span> <span>Data Viz</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <h2>Histogram</h2>
+          <hr />
+          <h4>About Histogram Visualization</h4>
+          <p>Histogram visualization is used to visualize the data distribution or data frequency by dividing the range of input data series into multiple non-overlapping intervals.</p>
+          <hr />
+          <h4>Use Case</h4>
+          <p>A plant operator wants to look at the operating temperature conditions for a machine over the past year. Example input for such a query could be the temperature readings from that machine.
+In essence such a task could be accomplished by looking at the temperature distribution or frequency to identify which temperature range is most prevalent in the data. Looking at a histogram visualization of temperature data, using a histogram visualization, user can quickly identify those prevalent temperature ranges.</p>
+          <hr />
+          <h4 id="examples">Example</h4>
+          <!-- <h6 id="default-example">Default Example</h6>
+          <p>A calendar with the default settings.</p>
+          <div id="calendar1" class="calendar"></div>
+          <h6 id="advanced-example">Advanced example</h6> -->
+          <p>A histogram with configurable behaviors.</p>
+          <div class="row">
+            <div class="span9">
+              <section class="module">
+              
+                <div class="module-body">
+                  <div id="histogram" style="width: 500px; height: 300px"></div>
+                  <h6 style="margin-top: 10px;">Example Data</h6>
+       			  <pre class="prettyprint linenums lang-javascript">
+var data = [12, 34, 23, 134, 12, 23, 45, 23, 7, 213, 35, 23, 54, 235]; </pre>
+                </div>
+                <footer class="module-footer">
+                </footer>
+              </section>
+            </div>
+            <div class="span3">
+              <section class="module">
+                <div class="module-body">
+                	<fieldset>
+	                    <div class="control-group" style="    float: left;    border-right: 1px solid lightgray;    margin-right: 20px;    padding-right: 38px;">
+	                      <h6>Bins</h6>
+	                      <div class="controls" style="">
+	                        <select id="bin-steps" class="input-small">
+	                          <option value="2">2</option>
+	                          <option value="3" selected="selected">3</option>
+	                          <option value="4">4</option>
+	                          <option value="5">5</option>
+	                          <option value="6">6</option>
+	                          <option value="7">7</option>
+	                          <option value="8">8</option>
+	                          <option value="9">9</option>
+	                          <option value="10">10</option>
+	                        </select>
+	                      </div>
+	                    </div>
+	                    
+	                    <h6>Distribution</h6>
+	                    <div class="btn-group" data-toggle="buttons-radio">
+		                    <button class="btn frequency-select" data-value= false>Prob</button>
+		                    <button class="btn frequency-select" data-value= true>Freq</button>
+	                  	</div>
+	                  	<hr />
+	                  
+	                  <div style="    float: left;    border-right: 1px solid lightgray;    margin-right: 20px;    padding-right: 10px;">
+		                  <h6>X-axis</h6>
+		                  <form class="form-horizontal">
+			                  <fieldset>
+			                    <div class="control-group">
+			                      <label class="checkbox">
+			                        <input type="checkbox" id="show-x-axis" checked="checked"> Show X-axis?
+			                      </label>
+			                    </div>
+			                  </fieldset>
+		                  </form>
+		                  
+	                    <div class="btn-group" data-toggle="buttons-radio">
+		                    <button class="btn x-axis-select" data-value= 'bottom'>bottom</button>
+		                    <button class="btn x-axis-select" data-value= 'top'>top</button>
+	                  	</div>
+	                  </div>
+	                  
+	                  <div>
+		                  <h6>Y-axis</h6>
+		                  <form class="form-horizontal">
+			                  <fieldset>
+			                    <div class="control-group">
+			                      <label class="checkbox">
+			                        <input type="checkbox" id="show-y-axis" checked="checked"> Show Y-axis?
+			                      </label>
+			                    </div>
+			                  </fieldset>
+		                  </form>
+		                  
+	                    <div class="btn-group" data-toggle="buttons-radio">
+		                    <button class="btn y-axis-select" data-value= 'left'>left</button>
+		                    <button class="btn y-axis-select" data-value= 'right'>right</button>
+	                  	</div>
+	                  </div>
+	                  
+	                  <hr />
+	                  
+	                  <div>
+		                  <h6>Bars</h6>
+		                  <form class="form-horizontal">
+			                  <fieldset>
+			                    <div class="control-group">
+			                      <label class="checkbox">
+			                        <input type="checkbox" id="show-barsvalue" checked="checked"> Show Bars Value?
+			                      </label>
+			                    </div>
+			                  </fieldset>
+		                  </form>
+		              
+	                  <form class="form-horizontal">
+	                  <fieldset>
+	                    <div class="control-group">
+	                      <label class="control-label" for="color-theme" style="width:85px;">Color Theme</label>
+	                      <div class="controls" style="margin-left:110px;">
+	                        <select id="color-theme" class="input-small">
+                        	  <option value="blue">blue</option>
+	                          <option value="orange">orange</option>
+	                          <option value="purple">purple</option>
+	                          <option value="red">red</option>
+	                          <option value="yellow">yellow</option>
+	                          <option value="green">green</option>
+	                        </select>
+	                      </div>
+	                    </div>
+	                  </fieldset>
+	                  </form>
+	                  
+	                  <hr />
+	                  	
+	                  <h6>Tooltip</h6>
+	                  <form class="form-horizontal">
+	                  <fieldset>
+	                    <div class="control-group">
+	                      <label class="checkbox">
+	                        <input type="checkbox" id="show-tooltip" checked> Show tooltip?
+	                      </label>
+	                    </div>
+	                  </fieldset>
+	                  </form>
+	                  <hr />
+	
+	                  <!-- <h6>Brushing</h6>
+	                  <form class="form-horizontal">
+	                  <fieldset>
+	                    <div class="control-group">
+	                      <label class="checkbox">
+	                        <input type="checkbox" id="enable-brushing"> Enable brushing?
+	                      </label>
+	                    </div>
+	                  </fieldset>
+	                  </form>
+	                  <hr /> -->
+	                  
+	                 </div>
+                  </fieldset>
+                </div>
+              </section>
+            </div>
+            
+          
+          
+          </div>
+          <h3 id="usage">Usage</h3>
+          <h6 style="margin-top: 10px;">Markup</h6>
+          <pre class="prettyprint linenums lang-html">
+&lt;div id="histogram" style="width: 500px; height: 300px" /&gt;</pre>
+          <h6 id="script">Script</h6>
+          <p>Instantiate a histogram visualization with id <code>histogram</code>:</p>
+          <pre class="prettyprint linenums lang-javascript">
+require(['jquery', 'declarative-visualizations'], function ($, visualizations) {
+  var histogram = visualizations.histogram('#histogram', options);
+}
+          </pre>
+          <hr />
+          <h4 id="options">Options</h4>
+          <p>Options can be passed via data attributes or JavaScript. For data attributes, append the option name to data-, as in data-bins="".</p>
+          <table class="table table-striped">
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Type</th>
+  <th>Default</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bins</code></td>
+<td>number</td>
+<td><code>5</code></td>
+<td>Specify the number of bins or intervals in which the underlying variable space is divided.</td>
+</tr>
+
+<tr>
+<td><code>frequency</code></td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Specifies whether the histogram's <code>y</code> value is a count (frequency) or a probability (density); the default is probability.</td>
+</tr>
+
+<tr>
+<td><code>range</code></td>
+<td>array</td>
+<td><code>[minimum, maximum]</code></td>
+<td>Specifies the data range for the histogram. Data values outside the specified range will be ignored. The range may be specified either as a two-element array representing the minimum and maximum value of the range, or as a function that returns the range given the array of values and the current index passed to histogram.</td>
+</tr>
+
+<tr>
+<td><code>tooltip</code></td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Enable the mouseover tooltip on each bar. Set to <code>false</code> to disable.</td>
+</tr>
+
+<!--<tr>-->
+<!--<td><code>brushing</code></td>-->
+<!--<td>boolean</td>-->
+<!--<td><code>false</code></td>-->
+<!--<td>Enable the brushing behavior on the calendar view. Set to <code>false</code> to disable.</td>-->
+<!--</tr>-->
+
+<tr>
+<td><code>colorTheme</code></td>
+<td>string</td>
+<td><code>"blue"</code></td>
+<td>The color theme to fill each bar - "blue" | "orange" | "purple" | "red" | "green" | "yellow"</td>
+</tr>
+
+<tr>
+<td><code>tweenDuration</code></td>
+<td>number</td>
+<td><code>500</code></td>
+<td>Set the animation transition duration in milliseconds.</td>
+</tr>
+
+<tr>
+<td><code>margin</code></td>
+<td>object</td>
+<td><code>{top: 10, right: 10, bottom: 20, left: 30}</code></td>
+<td>Set the margin of the calendar view. Make sure to give enough margin for the labels.</td>
+</tr>
+
+<tr>
+<td><code>showXAxis</code></td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Show the x-axis ticks on the histogram visualization. Set to <code>false</code> to hide.</td>
+</tr>
+
+<tr>
+<td><code>showYAxis</code></td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Show the y-axis ticks on the histogram visualization. Set to <code>false</code> to hide.</td>
+</tr>
+
+</tbody>
+</table>
+
+          <hr />
+
+          <h4 id="methods">Methods</h4>
+          <h6 id="updatedata-options">.update(data, options)</h6>
+          <p>Update the histogram view with the given array data. Accepts an optional options object to change visual encoding.</p>
+          <pre class="prettyprint linenums lang-javascript">
+var data = [12,34,23,134,12,23,45,23,7,213,35,23,54,235];
+          
+var options = {
+  brushing: true
+}
+
+histogram.update(data, options);</pre>
+
+          <h6 id="ontype-listener">.on(type, listener)</h6>
+          <p>Adds or removes an event listener to the visualization, for the specified type. The type is a string event type name, such as "click", or "hover". If an event listener was already registered for the same type, the existing listener is removed before the new listener is added. To register multiple listeners for the same event type, the type may be followed by an optional namespace, such as "click.foo" and "click.bar". To remove a listener, pass null as the listener.</p>
+          <pre class="prettyprint linenums lang-javascript">
+histogram.on('click', function(bin) {
+  alert('Clicked on bin: ' + bin);
+});</pre>
+          <hr />
+          <h4 id="events">Events</h4>
+          <table class="table table-striped">
+          <thead>
+          <tr>
+          <th>name</th>
+          <th>arguments</th>
+          <th>description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+          <td>click</td>
+          <td>(data, bar)</td>
+          <td>Triggered after the user clicks on each date.</td>
+          </tr>
+          <tr>
+          <td>hover</td>
+          <td>(data, bar)</td>
+          <td>Triggered on every mouse over on each date.</td>
+          </tr>
+          <!--<tr>-->
+          <!--<td>brush</td>-->
+          <!--<td>(data)</td>-->
+          <!--<td>Triggered on every mouse move, if the brush extent has changed</td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+          <!--<td>brushend</td>-->
+          <!--<td>(data)</td>-->
+          <!--<td>Triggered after the brushing is done.</td>-->
+          <!--</tr>-->
+          </tbody>
+          </table> 
+           
+          
+          
+          
+        </div>
+      </div>
+    </div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        baseUrl: '../'
+      });
+
+      require([
+        'jquery',
+        'prettify',
+        'declarative-visualizations'
+      ], function ($, prettify, visualizations) {
+        // Make code lovely using Google Prettify.
+        window.prettyPrint && prettyPrint();
+
+        var options = {
+            valueField: "CHI",
+              bins: 7
+        };
+        var histogram = visualizations.histogram('#histogram', options);
+//        var data = [12,34,23,134,12,23,45,23,7,213,35,23,54,235];
+//        histogram.update(data);
+        var data;
+        $.getJSON("data/calendar.json", function(d){
+            data = d;
+
+            data.map(function(d){
+                if (d.CHI>10000)
+                    d.CHI =  1 + Math.round(10000 * Math.random());
+            });
+
+            histogram.update(data);
+        });
+        
+        $('#bin-steps').change(function(){
+           var binSteps = parseInt($('#bin-steps').val());
+           options.bins = binSteps;
+           histogram.update(data, options);
+           
+         });
+        
+        $('.frequency-select').click(function(){
+           options.frequency = $(this).data('value');
+           histogram.update(data, options);
+        });
+
+        $('#show-x-axis').click(function() {
+           options.showXAxis = $("#show-x-axis").prop('checked');
+           histogram.update(data, options);
+         });
+        
+        $('.x-axis-select').click(function(){
+           options.xAxisOrient = $(this).data('value');
+           histogram.update(data, options);
+        });
+        
+        $('#show-y-axis').click(function() {
+           options.showYAxis = $("#show-y-axis").prop('checked');
+           histogram.update(data, options);
+         });
+        
+        $('.y-axis-select').click(function(){
+           options.yAxisOrient = $(this).data('value');
+           histogram.update(data, options);
+        });
+        
+        $('#show-tooltip').click(function() {
+           options.tooltip = $("#show-tooltip").prop('checked');
+           histogram.update(data, options);
+         });
+        
+        $('#show-barsvalue').click(function() {
+           options.showBarsValue = $("#show-barsvalue").prop('checked');
+           histogram.update(data, options);
+         });
+        
+        $('#color-theme').change(function(){
+           options.colorTheme = $('#color-theme').val();
+           histogram.update(data, options);
+           
+         });
+
+      });
+    </script>
+
+  </body>
+</html>

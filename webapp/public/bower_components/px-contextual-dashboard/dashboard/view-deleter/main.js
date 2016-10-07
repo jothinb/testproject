@@ -1,0 +1,1 @@
+define(['./view-deleter-controller', './view-deleter-directive'], function() {});

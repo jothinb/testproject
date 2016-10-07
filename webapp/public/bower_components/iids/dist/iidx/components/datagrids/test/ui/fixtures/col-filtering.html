@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DataGrids Test Fixture</title>
+
+        <!-- used by local runs, will 404 from with the IIDx -->
+        <link href="../../../css/iidx-datagrids.css" rel="stylesheet" type="text/css">
+        <link href="../../../css/iidx-responsive.css" rel="stylesheet" type="text/css">
+
+        <!-- used by runs from within the IIDx, will 404 locally -->
+        <link href="/css/iids.css" rel="stylesheet">
+
+        <style>
+            body {
+                background-color: #fff;
+            }
+            p {
+                clear: both;
+                margin: 20px 0 10px 5px;
+                font-weight: bold;
+                border-bottom: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Column filtering</p>
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" data-table-name="col-filter-example">
+
+        </table>
+
+        <!-- used by local runs, will 404 from with the IIDx -->
+        <script src="../../../components/requirejs/require.js"></script>
+        <script src="../../require.config.js"></script>
+
+        <!-- used by runs from within the IIDx, will 404 locally -->
+        <script src="/components/requirejs/require.js"></script>
+        <script src="/js/require.config.js"></script>
+        <script>
+            requirejs.config({
+                baseUrl: "/"
+            });
+        </script>
+
+        <script type="text/javascript">
+            require(['jquery', 'datagrids'], function ($) {
+                //Filtering
+                // From http://datatables.net/release-datatables/examples/api/multi_filter.html
+                // See also http://datatables.net/release-datatables/examples/api/multi_filter_select.html
+                // See also http://datatables.net/release-datatables/examples/api/regex.html
+                // See also http://datatables.net/release-datatables/examples/plug-ins/range_filtering.html
+                $('table[data-table-name="col-filter-example"]').iidsBasicDataGrid({
+                    'aoColumns': [
+                        { 'sTitle': 'Rendering engine', 'mData': 'engine', 'sClass': 'essential'},
+                        { 'sTitle': 'Browser', 'mData': 'browser', 'sClass': 'essential', 'filter':true},
+                        { 'sTitle': 'Platform(s)', 'mData': 'platform', 'sClass': 'optional', 'filter': true},
+                        { 'sTitle': 'Engine version', 'mData': 'version', 'filter':true, 'filterPlaceholder':'Filter by this field'},
+                        { 'sTitle': 'CSS grade', 'mData': 'grade', 'sClass': 'essential', 'filter':true}
+                    ],
+                    'sAjaxSource': './data/ao.browsers.json',
+                    'useFloater': false,
+                    'isResponsive': true
+                });
+            });
+        </script>
+        <script src="../../../components/respond/respond.src.js"></script>
+    </body>
+</html>

@@ -1,0 +1,12 @@
+<div class="smallcard">
+	<div class="card-header">
+		<div class="pull-left image-container">
+			<div class="image-style {{getShipperClass(info.shprName)}}"></div>
+		</div>
+		<div class="pull-left container-header">
+			<span>{{info.unitInit}}</span>
+			<span>{{info.unitNbr}}</span>
+			<span class="slotSpan"><span ng-if="info.containerType === 'PICKING'">S</span>{{(info.slotNbr/2)-((info.slotNbr/2)%1)}}</span>
+		</div>
+	</div>
+</div>

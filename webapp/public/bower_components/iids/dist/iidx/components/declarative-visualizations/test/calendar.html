@@ -1,0 +1,493 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Data Viz - Calendar</title>
+    <meta charset="utf8">
+    <link href="../components/prettify/prettify.css" rel="stylesheet">
+    <link href="../css/iidx-declarative-visualizations.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar navbar-static-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="index.html"><span class="ge-logo"></span> <span>Data Viz</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <h2 id="calendar-view">Calendar View</h2>
+          <hr />
+          <h4 id="about-calendar-view">About Calendar View</h4>
+          <p>Calendar view can be used to provide an overview of time series data by visualizing the data points as colored cells per day. Days are arranged into columns by row, then grouped by month and years. Values are then quantized into a given color scale.</p>
+          <hr />
+          <h4 id="examples">Examples</h4>
+          <!-- <h6 id="default-example">Default Example</h6>
+          <p>A calendar with the default settings.</p>
+          <div id="calendar1" class="calendar"></div>
+          <h6 id="advanced-example">Advanced example</h6> -->
+          <p>A calendar with configurable behaviors.</p>
+          <div class="row">
+            <div class="span9">
+              <section class="module">
+                <header class="module-header">
+                </header>
+                <div class="module-body">
+                  <div id="calendar" style= "height: 600px"></div>
+                </div>
+                <footer class="module-footer">
+                </footer>
+              </section>
+            </div>
+            <div class="span3">
+              <section class="module">
+                <header class="module-header">
+                </header>
+                <div class="module-body">
+                  <!-- <h6>Data Manipulation</h6>
+                  <div class="btn-group">
+                    <button class="btn" id="render-all">Load</button>
+                    <button class="btn" id="render-step">Update</button>
+                    <button class="btn" id="render-clean">Clean</button>
+                  </div>
+                  <hr/> -->
+
+                  <h6>Layout</h6>
+                  <div class="btn-group">
+                    <button class="btn" id="layout-vertical">Vertical</button>
+                    <button class="btn" id="layout-horizontal">Horizontal</button>
+                    <button class="btn" id="layout-horizontal-vertical">Horizontal-Vertical</button>
+                  </div>
+                  <hr />
+
+                  <h6>Year Range</h6>
+                  <form class="form-horizontal">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label" for="start-year" style="width:100px;">Start at</label>
+                      <div class="controls" style="margin-left:110px;">
+                        <select id="start-year" class="input-small">
+                          <option value="2006">2006</option>
+                          <option value="2007">2007</option>
+                          <option value="2008">2008</option>
+                          <option value="2009">2009</option>
+                          <option value="2010">2010</option>
+                          <option value="2011">2011</option>
+                          <option value="2012">2012</option>
+                          <option value="2013">2013</option>
+                          <option value="2014">2014</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label" for="total-years" style="width:100px;">Total years</label>
+                      <div class="controls" style="margin-left:110px;">
+                        <select id="total-years" class="input-small">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+                  </form>
+                  <!-- <div class="btn-group">
+                    <button class="btn" id="year-range-set">Set</button>
+                    <button class="btn" id="year-range-reset">Reset</button>
+                  </div> -->
+                  <hr />
+
+                  <h6>Tooltip</h6>
+                  <form class="form-horizontal">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="checkbox">
+                        <input type="checkbox" id="show-tooltip" checked> Show tooltip?
+                      </label>
+                    </div>
+                  </fieldset>
+                  </form>
+                  <hr />
+
+                  <h6>Legend</h6>
+                  <form class="form-horizontal">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="checkbox">
+                        <input type="checkbox" id="show-legend" checked> Show legend?
+                      </label>
+                    </div>
+                  </fieldset>
+                  </form>
+                  <hr />
+
+                  <h6>Brushing</h6>
+                  <form class="form-horizontal">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="checkbox">
+                        <input type="checkbox" id="enable-brushing"> Enable brushing?
+                      </label>
+                    </div>
+                  </fieldset>
+                  </form>
+                  <hr />
+
+                  <h6>Color</h6>
+                  <form class="form-horizontal">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label" for="color-theme" style="width:100px;">Theme</label>
+                      <div class="controls" style="margin-left:110px;">
+                        <select id="color-theme" class="input-small">
+                        	  <option value="orange">orange</option>
+                          	  <option value="blue">blue</option>
+	                          <option value="purple">purple</option>
+	                          <option value="red">red</option>
+	                          <option value="yellow">yellow</option>
+	                          <option value="green">green</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label" for="color-steps" style="width:100px;">Steps</label>
+                      <div class="controls" style="margin-left:110px;">
+                        <select id="color-steps" class="input-small">
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+                  </form>
+                  <!-- <div class="btn-group">
+                    <button class="btn" id="color-set">Set</button>
+                  </div> -->
+                  <hr />
+                  
+                  <div class="alert alert-info"><span id="status" style="word-wrap: break-word;">Events</span></div>
+                </div>
+                <footer class="module-footer">
+                </footer>
+              </section>
+            </div>
+          </div>
+          <h3 id="usage">Usage</h3>
+          <h6 id="markup">Markup</h6>
+          <!-- <p>Set class="calendar" on an <code>div</code> element.</p> -->
+          <pre class="prettyprint linenums lang-html">
+&lt;div id="calendar" style= "height: 600px" /&gt;</pre>
+<p>Container dimensions are used for rendering calendar, minimum limit for <code>width</code> and <code>height</code> is <code>300px</code>.</p>
+          <h6 id="script">Script</h6>
+          <p>Instantiate a calendar view with id <code>myCalendar</code>:</p>
+          <pre class="prettyprint linenums lang-javascript">
+require(['jquery', 'declarative-visualizations'], function ($, visualizations) {
+  var myCalendar = visualizations.calendar('#calendar', options);
+}</pre>
+          <hr />
+          <h4 id="options">Options</h4>
+          <p>Options can be passed via data attributes or JavaScript. For data attributes, append the option name to data-, as in data-dateField="".</p>
+          <table class="table table-striped">
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Type</th>
+  <th>Default</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dateField</code></td>
+<td>string</td>
+<td><code>''</code></td>
+<td>Required. The date field name for each data record, determining where the data record is positioned in the calendar view.</td>
+</tr>
+<tr>
+<td><code>valueField</code></td>
+<td>string</td>
+<td><code>''</code></td>
+<td>Required. The value field name for each data recrod, describing which variable of the data record is color-coded in the calendar view.</td>
+</tr>
+<tr>
+<td><code>yearRange</code></td>
+<td>array</td>
+<td><code>null</code></td>
+<td>The start and stop year to show in the calendar view. Leave null or empty for automatic update from data.</td>
+</tr>
+<tr>
+<td><code>tooltip</code></td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Enable the mouseover tooltip on each day. Set to <code>false</code> to disable.</td>
+</tr>
+<tr>
+<td><code>legend</code></td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Show the legend. Set to <code>false</code> to hide.</td>
+</tr>
+<tr>
+<td><code>brushing</code></td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Enable the brushing behavior on the calendar view. Set to <code>false</code> to disable.</td>
+</tr>
+<tr>
+<td><code>layout</code></td>
+<td>string</td>
+<td><code>'vertical'</code></td>
+<td>Set the layout of the calendar view - vertical | horizontal | horizontal-vertical</td>
+</tr>
+<tr>
+<td><code>colorTheme</code></td>
+<td>string</td>
+<td><code>"orange"</code></td>
+<td>The color theme to fill each day cell - "blue" | "orange" | "purple" | "red" | "green" | "yellow"</td>
+</tr>
+<tr>
+<td><code>colorSteps</code></td>
+<td>number | array</td>
+<td><code>3</code></td>
+<td>If colorSteps is number, it specifies the number of colors to fill each day cell. If colorSteps is an array of numbers, it specifies a list of value thresholds to fill each day cell.</td>
+</tr>
+<tr>
+<td><code>tweenDuration</code></td>
+<td>number</td>
+<td><code>500</code></td>
+<td>Set the animation transition duration in milliseconds.</td>
+</tr>
+<tr>
+<td><code>margin</code></td>
+<td>object</td>
+<td><code>{top: 30, right: 30, bottom: 30, left: 30}</code></td>
+<td>Set the margin of the calendar view. Make sure to give enough margin for the labels.</td>
+</tr>
+</tbody>
+</table>
+
+          <hr />
+
+          <h4 id="methods">Methods</h4>
+          <h6 id="updatedata-options">.update(data, options)</h6>
+          <p>Update the calendar view with the given data. Accepts an optional options object to change calendar behaviors.</p>
+          <pre class="prettyprint linenums lang-javascript">
+$.getJSON("data/calendar.json", function(data){
+  var options = {
+    brushing: true
+  }
+  myCalendar.update(data, options);
+});</pre>
+
+          <h6 id="ontype-listener">.on(type, listener)</h6>
+          <p>Adds or removes an event listener to the calendar view, for the specified type. The type is a string event type name, such as "click", or "hover". If an event listener was already registered for the same type, the existing listener is removed before the new listener is added. To register multiple listeners for the same event type, the type may be followed by an optional namespace, such as "click.foo" and "click.bar". To remove a listener, pass null as the listener.</p>
+          <pre class="prettyprint linenums lang-javascript">
+myCalendar.on('click', function(date, data) {
+  alert('Clicked on date: ' + date);
+});</pre>
+          <hr />
+          <h4 id="events">Events</h4>
+          <table class="table table-striped">
+          <thead>
+          <tr>
+          <th>name</th>
+          <th>arguments</th>
+          <th>description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+          <td>click</td>
+          <td>(date, value)</td>
+          <td>Triggered after the user clicks on each date.</td>
+          </tr>
+          <tr>
+          <td>hover</td>
+          <td>(date,value)</td>
+          <td>Triggered on every mouse over on each date.</td>
+          </tr>
+          <tr>
+          <td>brush</td>
+          <td>(value)</td>
+          <td>Triggered on every mouse move, if the brush extent has changed</td>
+          </tr>
+          <tr>
+          <td>brushend</td>
+          <td>(value)</td>
+          <td>Triggered after the brushing is done.</td>
+          </tr>
+          </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        baseUrl: '../'
+      });
+
+      require([
+        'jquery',
+        'prettify',
+        'declarative-visualizations'
+      ], function ($, prettify, visualizations) {
+        // Make code lovely using Google Prettify.
+        window.prettyPrint && prettyPrint();
+
+        var options1 = {
+          valueField: "CHI",
+          dateField: "DATE"
+        };
+        //var calendar1 = visualizations.calendar('#calendar1', options1);
+
+        var options2 = {
+          valueField: "CHI",
+          dateField: "DATE",
+          tooltip: true
+        };
+        var calendar = visualizations.calendar('#calendar', options2);
+        var calendarData;
+
+        $.getJSON("data/calendar.json", function(data){
+          //calendar1.update(data);
+          calendar.update(data);
+          calendarData = data;
+        });
+
+        calendar.on('click', function(date, data) {
+          $("#status").html("SELECTED Date: " + date + " <br/>Data: " + JSON.stringify(data));
+        });
+        calendar.on('hover', function(date, data) {
+          $("#status").html("HIGHLIGHTED Date: " + date + " <br/>Data: " + JSON.stringify(data));
+        });
+        calendar.on('brushend', function(d) {
+          $("#status").html("BRUSHED: " + d.length + " records selected!");
+        });
+
+        $('#render-all').click(function() {
+          $.getJSON("data/calendar.json", function(data){
+            calendarData = data;
+            calendar.update(calendarData);
+          });
+        });
+
+        $('#render-step').click(function() {
+          $.getJSON("data/calendar.json", function(data){
+            calendarData = data;
+            var times = 0;
+            var step = 30;
+
+            var interval = setInterval(function() {
+              times++;
+              if (step * (times + 1) < calendarData.length) {
+                calendar.update(calendarData.slice(0, step * times));
+              }
+              else {
+                calendar.update(calendarData);
+                clearInterval(interval);
+              }
+            }, 500);
+          });
+        });
+
+        $('#render-clean').click(function() {
+          calendarData = [];
+          calendar.update(calendarData);
+        });
+
+        $('#layout-vertical').click(function() {
+          calendar.update(calendarData, {
+            layout: 'vertical'
+          });
+        });
+
+        $('#layout-horizontal-vertical').click(function() {
+          calendar.update(calendarData, {
+            layout: 'horizontal-vertical'
+          });
+        });
+
+        $('#layout-horizontal').click(function() {
+          calendar.update(calendarData, {
+            layout: 'horizontal'
+          });
+        });
+
+        $('#start-year').change(function(){
+          var start = parseInt($('#start-year').val());
+          var num = parseInt($('#total-years').val());
+          var end = start + num;
+
+          calendar.update(calendarData, {
+            yearRange: [start, end]
+          });
+        });
+        
+        $('#total-years').change(function(){
+           var start = parseInt($('#start-year').val());
+           var num = parseInt($('#total-years').val());
+           var end = start + num;
+
+           calendar.update(calendarData, {
+             yearRange: [start, end]
+           });
+         });
+
+
+        $('#show-tooltip').click(function() {
+          var tooltip = $("#show-tooltip").prop('checked');
+          calendar.update(calendarData, {
+            tooltip: tooltip
+          });
+        });
+
+        $('#show-legend').click(function() {
+          var legend = $("#show-legend").prop('checked');
+          calendar.update(calendarData, {
+            legend: legend
+          });
+        });
+
+        $('#enable-brushing').click(function() {
+          var brushing = $("#enable-brushing").prop('checked');
+          calendar.update(calendarData, {
+            brushing: brushing
+          });
+        });
+
+        $('#color-theme').change(function(){
+          var colorTheme = $('#color-theme').val();
+
+          calendar.update(calendarData, {
+            colorTheme: colorTheme
+          });
+        });
+        
+        $('#color-steps').change(function(){
+           var colorSteps = parseInt($('#color-steps').val());
+
+           calendar.update(calendarData, {
+             colorSteps: colorSteps
+           });
+         });
+
+      });
+    </script>
+
+  </body>
+</html>

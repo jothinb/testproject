@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../css/hdx-declarative-visualizations-lights-off.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Contextual Horizontal Stacked Bar</h1>
+    <section id="pill-viz" class="module span6">
+      <header class="module-header">
+        <h3 class="voice voice-brand pull-left">Lights Off</h3>
+      </header>
+      <div class="module-body">
+        <style type="text/css" media="screen">
+          div.viz-point-label {
+          position: absolute;
+          text-align: right;
+          white-space: nowrap;
+          }
+        </style>
+        <div data-visualization="pill" data-values="1,1,1" data-label="Total Lorem Ipsum" data-classes="success, warning, danger" data-thickness="12">
+        </div>
+	  </div>
+      <footer class="module-footer"></footer>
+    </section>
+	
+	<script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "../"
+      });
+      require(['hdx-declarative-visualizations'], function(visualizations) {
+        // Initialize Bar Visualizations
+        $('div[data-visualization="pill"]').each(function(i, element) {
+          var pill = visualizations.pill(element);
+        });
+     });
+    </script>
+
+  </body>
+</html>

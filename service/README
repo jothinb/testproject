@@ -1,0 +1,23 @@
+
+Build and run service:
+	(1) git clone ssh://your-openge-id@openge.ge.com/gitroot/getsoasis oasis
+	(2) change directory to oasis/service
+	(3) mvn clean package
+	(4) java -jar ./target/service-0.0.1-SNAPSHOT.jar
+	
+Run web application
+	(1) download and install predix-core-14.3
+	(2) run ./dsp clean in ${predix_home}/predix-core/bin
+	(3) go to getsoasis/webapp and run activator run
+
+URL patterns:
+	http://localhost:8080/oasis/location
+	http://localhost:8080/oasis/location/class/80
+	http://localhost:8080/oasis/unit
+	http://localhost:8080/oasis/crane
+	http://localhost:8080/oasis/position
+	http://localhost:8080/yard.html
+	http://localhost:8080
+
+Database:
+	H2 in-memory database

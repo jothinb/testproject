@@ -1,0 +1,12 @@
+module.exports = {
+
+	URL: 'http://sjc1eserv1webd01.crd.ge.com:8000/hopper/',
+
+	SUITES: {
+		TSO: {
+			USERNAME: 'RC360WSAI',
+			PASSWORD: 'Kg76j46j',
+			ROLE: 'WSA'
+		},
+	},
+};

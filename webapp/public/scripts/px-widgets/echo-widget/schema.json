@@ -1,0 +1,12 @@
+{
+    "id": "v-echo",
+    "name": "EchoWidget",
+    "type": "time-series",
+    "schema": {
+        "type": "object",
+        "properties": {
+        },
+        "required": []
+    },
+    "defaultOptions": {}
+}

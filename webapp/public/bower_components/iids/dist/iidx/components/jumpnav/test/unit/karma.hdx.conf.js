@@ -1,0 +1,24 @@
+var defaultConfig = require('karma-support').defaultKarmaConf;
+module.exports = function(config) {
+
+    defaultConfig(config); //inherit from default config
+
+    config.set({
+
+        // base path, that will be used to resolve files and exclude
+        basePath: '../../',
+
+        // list of files / patterns to load in the browser
+        files: [
+            {pattern: 'test/fixtures/hdx/*.html', included: false, served: true },
+            {pattern: 'js/**/!(require.config).js', included: false, served: true }, // make everything in our project available (but don't load it) except require config
+            {pattern: 'css/**', included: false, served: true},
+            {pattern: 'components/**/*.*', included: false, served: true},
+            {pattern: 'node_modules/karma-support/src/js/unit/karma/fixtures.js', included: false, served: true},
+            'js/require.config.js' // require config needs to be loaded into the browser
+        ].concat(config.defaultFiles), // concat together with all the default paths
+
+        // enable / disable watching file and executing tests whenever any file changes, Defaults to false
+        autoWatch: false
+    });
+};

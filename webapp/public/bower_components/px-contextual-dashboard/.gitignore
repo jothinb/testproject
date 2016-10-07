@@ -1,0 +1,12 @@
+node_modules/
+bower_components/
+*.log
+
+build/
+
+.idea
+atlassian-ide-plugin.xml
+
+coverage/
+docs/
+.tmp

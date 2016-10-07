@@ -1,0 +1,10 @@
+<div class="container-fluid">
+	<div class="row row1">
+		<div class="module col-md-3 addVisual1 cursorPointer">
+			<div ng-click="addVisual()"><i class="icon-plus-sign"></i> Add Visualization</div>
+		</div>
+		<div ng-repeat="dataset in addressCollection track by $index">
+			<visual-widget address="dataset" dataindex1="$index"></visual-widget>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,31 @@
+<div class="px-tree-nav">
+    <div class="px-tree-breadcrumbs" ng-if="showBreadcrumbs">
+        <span ng-click="onBreadCrumbClick(0)">{{parentNodes[0].header}}</span>
+        <span ng-if="isEllipsisShown()" id="px-tree-breadcrumbs-ellipsis">...</span>
+        <span ng-if="isBreadcrumbVisible($index)" class="px-tree-breadcrumb" ng-repeat="p in parentNodes"
+        ng-click="onBreadCrumbClick($index)">{{getBreadcrumb(p, $index-1)}}&nbsp;&gt;&nbsp;</span>
+    </div>
+    <div class="px-tree-nav-row">
+        <div class="px-tree-level" ng-repeat="n in displayNodes" >
+            <table class="table table-condensed px-tree-table">
+                <thead>
+                    <th class="px-tree-header">{{n.header}}</th>
+                </thead>
+                <tbody ng-if="n.children.length > 0">
+                    <tr ng-repeat="item in n.children">
+                        <td ng-class="{'active' : item.selected === true}" ng-click="onRowClick(item)">
+                            <span class="px-tree-item">{{ item[ labelField ] }}</span>
+                            <i class="icon-ico_chevron_right_sm" ng-show="item.selected"></i>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody ng-if="n.children.length === 0" class="empty">
+                    <tr>
+                        <td>{{'dashboard.contextbrowser.nochildren' | vmessages}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button class="btn px-tree-open-btn" ng-click="onOpenClick()" ng-show="isOpenable(selectedItem)">{{'dashboard.contextbrowser.openbutton' | vmessages}}</button>
+</div>

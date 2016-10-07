@@ -1,0 +1,18 @@
+[ {
+    "name" : "Foo",
+    "identifier" : "001-2-1",
+    "category" : "/part/c2z-McGhT8iC0Gn-kdh96w",
+    "nodeIdentifier" : "001-2-1",
+    "hasChildren" : true,
+    "entity" : true,
+    "entityType": "level21",
+    "category": "top2"
+}, {
+    "name" : "Barr",
+    "identifier" : "001-2-2",
+    "nodeIdentifier" : "001-2-2",
+    "hasChildren" : true,
+    "entity" : false,
+    "entityType": "level22",
+    "category": "top2"
+} ]

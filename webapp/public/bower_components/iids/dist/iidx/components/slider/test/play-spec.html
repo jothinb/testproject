@@ -1,0 +1,493 @@
+<!doctype html>
+<html>
+<head>
+<title>Slider Component</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<!-- slider stuff -->
+<link href="../css/slider.css" rel="stylesheet">
+<link href="../css/slider.new.css" rel="stylesheet">
+<link href="../css/slider.iidx.css" rel="stylesheet">
+<!--
+<link href="../css/slider.new.css" rel="stylesheet">
+-->
+<link href="../css/responsive.css" rel="stylesheet">
+<!--[if IE 9]>
+  <link id="theme-ie9" href="../css/ie9.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 26px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+th {
+	background: #e3e3e3;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 46px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 48px;
+}
+h2 {
+    font-size: 38px;
+}
+h3 {
+    font-size: 32px;
+}
+h4 {
+    font-size: 22px;
+}
+h5 {
+    font-size: 18px;
+}
+h6 {
+    font-size: 16px;
+}
+hr {
+    margin: 25px 0 5px 0;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>&nbsp;</title>
+
+</head>
+<body>
+<h1>&nbsp;</h1>
+
+<h2>Slider</h2>
+
+<hr />
+
+<h4>About Slider</h4>
+
+<p>Sliders are streamlined and flexible data entry assistants with the minimum required functionality and smart defaults.</p>
+
+<hr />
+
+<h4>Examples</h4>
+
+<h6>Default Example</h6>
+
+<p>A horizontal slider with the default settings.</p>
+<div class="">
+<input class="slider" type="range" min="0" max="500" value="150" />
+</div>
+
+<h6>Another example</h6>
+
+<div class="iidx">
+<input class="slider" type="range" min="0" max="500" value="150" />
+</div>
+
+<h6>Another example</h6>
+<div class="hdx">
+  <div class="slider span5 active">
+    <button class="less slider-button">
+      <i class="icon-minus"></i>
+    </button>
+    <div class="center">
+      <div class="content">
+        <label>
+          Label
+        </label>
+        <div class="interactive">
+          <div class="track-and-thumb">
+            <div class="track"></div>
+            <button class="thumb" style="">
+              <i class="icon-chevron-left"></i>
+              <i class="icon-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="more slider-button">
+      <i class="icon-plus"></i>
+    </button>
+  </div>
+</div><!-- /.hdx -->
+
+<hr />
+
+<h3>Usage</h3>
+
+<h6>Via data attributes</h6>
+
+<p>Activate a slider without writing JavaScript. Set data-slider="true" on an input element with type "range" to activate the slider input.</p>
+
+<pre><code>&lt;input type="range" data-slider="horizontal" /&gt;
+</code></pre>
+
+<h6>Via Javascript</h6>
+
+<p>Call a slider with id mySlider with a single line of JavaScript:</p>
+
+<pre><code>$('#mySlider').modal(options)
+</code></pre>
+
+<hr />
+
+<h4>Options</h4>
+
+<p>Options can be passed via data attributes or JavaScript. For data attributes, append the option name to data-, as in data-orientation="".</p>
+
+<table>
+<thead>
+<tr>
+<th>Name </th>
+<th> type </th>
+<th> default </th>
+<th> description </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> min </td>
+<td> number </td>
+<td> 0 </td>
+<td> Minimum value</td>
+</tr>
+<tr>
+<td> max </td>
+<td> number </td>
+<td> 100 </td>
+<td> Maximum value</td>
+</tr>
+<tr>
+<td> value </td>
+<td> number </td>
+<td> 0 </td>
+<td> Initial value of the slider</td>
+</tr>
+<tr>
+<td> orientation </td>
+<td> string </td>
+<td> 'horizontal' </td>
+<td> Set the slider orientation - horizontal | vertical</td>
+</tr>
+<tr>
+<td> indicator-color </td>
+<td> string </td>
+<td> '#336699' </td>
+<td> Color of current value indicator  - inside | outside</td>
+</tr>
+<tr>
+<td> buttons </td>
+<td> boolean </td>
+<td> true </td>
+<td> Toggle "+" and "-" button visibility</td>
+</tr>
+<tr>
+<td> buttonPosition </td>
+<td> string </td>
+<td> 'together' </td>
+<td> Set the position of the buttons - together | apart</td>
+</tr>
+<tr>
+<td> showTickmarks </td>
+<td> boolean </td>
+<td> false </td>
+<td> Toggle</td>
+</tr>
+<tr>
+<td> showScale </td>
+<td> boolean </td>
+<td> false </td>
+<td> Show a numeric scale on the slider axis</td>
+</tr>
+<tr>
+<td> pixelsPerLabel </td>
+<td> integer </td>
+<td> 25 </td>
+<td> Space given to each scale label</td>
+</tr>
+<tr>
+<td> labelUpdate </td>
+<td> boolean </td>
+<td> true </td>
+<td> Update label based on current value of slider</td>
+</tr>
+<tr>
+<td> labelUnit </td>
+<td> string </td>
+<td> null </td>
+<td> Unit for current value label</td>
+</tr>
+<tr>
+<td> labelPosition </td>
+<td> string </td>
+<td> 'inside' </td>
+<td> Set the label position - inside | outside</td>
+</tr>
+<tr>
+<td> tooltip </td>
+<td> boolean </td>
+<td> false </td>
+<td> Set tooltip to appear above thumb when pressed</td>
+</tr>
+<tr>
+<td> step </td>
+<td> boolean </td>
+<td> true </td>
+<td> Toggles stepping between values on slider</td>
+</tr>
+<tr>
+<td> stepValue </td>
+<td> number </td>
+<td> 1.0 </td>
+<td> Determines value of each interval the slider moves</td>
+</tr>
+<tr>
+<td> dragEdit </td>
+<td> boolean </td>
+<td> false </td>
+<td> Enable “Edited not aplied” state</td>
+</tr>
+<tr>
+<td> dragLocked </td>
+<td> boolean </td>
+<td> false </td>
+<td> Set to “Locked, inspection only” state</td>
+</tr>
+<tr>
+<td> drageGhost </td>
+<td> boolean </td>
+<td> false </td>
+<td> Enable “Ghost of previous value” state</td>
+</tr>
+<tr>
+<td> keyboardEntry </td>
+<td> boolean </td>
+<td> false </td>
+<td> enable</td>
+</tr>
+</tbody>
+</table>
+
+
+<hr />
+
+<h4>Methods</h4>
+
+<h6>.slider(options)</h6>
+
+<p>Activates your content as a slider. Accepts an optional options object.</p>
+
+<pre><code>$('#mySlider').slider({
+    oreintation: 'horizontal'
+});
+</code></pre>
+
+<h6>.slider('toggle')</h6>
+
+<p>Manually toggles visibility of a slider.</p>
+
+<pre><code>$('#mySlider').modal('toggle');
+</code></pre>
+
+<h6>.slider('shows')</h6>
+
+<p>Manually shows a modal.</p>
+
+<pre><code>$('#mySlider').modal('hide');
+</code></pre>
+
+<h6>.slider('hides')</h6>
+
+<p>Manually hides a modal.</p>
+
+<pre><code>$('#mySlider').modal('show');
+</code></pre>
+
+<h6>.slider('hello')</h6>
+
+<p>Another method as yet undefined :)</p>
+
+<pre><code>$('#mySlider').modal('hello');
+</code></pre>
+
+<hr />
+
+<h4>Events</h4>
+
+<table>
+<thead>
+<tr>
+<th> name </th>
+<th> arguments </th>
+<th> description  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> change </td>
+<td> (event,value) </td>
+<td> Triggered after the user slides a handle, if the value has changed; or if the value is changed programmatically via the value method.</td>
+</tr>
+<tr>
+<td> create </td>
+<td> (event) </td>
+<td> Triggered when the slider is created.</td>
+</tr>
+<tr>
+<td> slide </td>
+<td> (event,value) </td>
+<td> Triggered on every mouse move during slide.</td>
+</tr>
+<tr>
+<td> start </td>
+<td> (event,value) </td>
+<td> Triggered when the user starts sliding.</td>
+</tr>
+<tr>
+<td> stop </td>
+<td> (event,value) </td>
+<td> Triggered after the user slides a handle.</td>
+</tr>
+</tbody>
+</table>
+
+
+<hr />
+
+<p><br/>
+<br/>
+<br/></p>
+
+
+
+<script src="../components/requirejs/require.js"></script>
+  <script src="require.config.js"></script>
+  <script type="text/javascript">
+    require.config({
+      baseUrl: '../'
+    });
+    require(['jquery','slider'], function ($,slider) {
+      console.log( $("input[type='range']").length );
+      $("input[type='range'].slider").slider({});
+    });
+  </script>
+
+</body>
+</html>

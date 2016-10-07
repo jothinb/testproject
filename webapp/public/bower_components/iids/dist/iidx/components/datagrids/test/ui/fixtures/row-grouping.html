@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataGrids Test Fixture</title>
+
+    <link href="../../../css/iidx-datagrids.css" rel="stylesheet" type="text/css">
+    <link href="../../../css/iidx-responsive.css" rel="stylesheet" type="text/css">
+
+    <style>
+        p {
+            clear: both;
+            margin: 20px 0 10px 5px;
+            font-weight: bold;
+            border-bottom: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<p>Row grouping</p>
+
+<div class="rowGroupingDropdown push-right">
+
+</div>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" data-table-name="row-grouping-example">
+
+</table>
+
+<script src="../../../components/requirejs/require.js"></script>
+<script src="../../require.config.js"></script>
+
+<script type="text/javascript">
+    require(['jquery', 'datagrids', 'datagrids/datagrids-row-grouping'], function ($) {
+
+        // Row grouping
+        // From http://datatables.net/release-datatables/examples/advanced_init/row_grouping.html
+        $('table[data-table-name="row-grouping-example"]').iidsBasicDataGrid({
+            'aoColumns': [
+                { 'sTitle': 'Rendering engine', 'mData': 'engine', 'sClass': 'essential' },
+                { 'sTitle': 'Browser', 'mData': 'browser', 'sClass': 'essential' },
+                { 'sTitle': 'Platform(s)', 'mData': 'platform', 'sClass': 'optional' },
+                { 'sTitle': 'Engine version', 'mData': 'version' },
+                { 'sTitle': 'CSS grade', 'mData': 'grade', 'sClass': 'essential' }
+            ],
+            'sAjaxSource': './data/ao.browsers.json',
+
+            'plugins': ["G"], //enable the row grouping plugin (assumes datagrids/datagrids-row-grouping.js is on the page)
+            "bPaginate": false, // pagination is not compatible with row grouping
+            "rowGrouping": {
+                rowGroupingDropdownSelector: ".rowGroupingDropdown", //tell the plugin where to put the row grouping control
+                defaultGroupingCol: "browser"
+            }
+        });
+    });
+</script>
+<script src="../../../components/respond/respond.src.js"></script>
+</body>
+</html>

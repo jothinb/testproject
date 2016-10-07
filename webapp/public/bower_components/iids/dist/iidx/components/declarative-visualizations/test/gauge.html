@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../css/iidx-declarative-visualizations.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- Reduce the width of this containing div to see the responsiveness of the gauge -->
+    <div style="width: 300px;">
+      <div data-visualization="gauge" data-duration="1000" data-value="23" data-max="100" data-threshold="50" data-label-min="MIN" data-label-max="MAX"></div>
+    </div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "../"
+      });
+
+      require(['declarative-visualizations'], function(visualizations) {
+        var names = ['MINIMUM', 'MAXIMUM', 'MINIMUM', 'MAXIMUM', '0', '100'];
+        $('div[data-visualization="gauge"]').each(function(i, element) {
+          var gauge = visualizations.gauge(element);
+          setInterval(function() {
+            $('div[data-visualization="gauge"]').attr('data-value', Math.random() * 100);
+            $('div[data-visualization="gauge"]').attr('data-label-min', names[Math.floor(Math.random() * 6)]);
+            $('div[data-visualization="gauge"]').attr('data-label-max', names[Math.floor(Math.random() * 6)]);
+            gauge.update();
+          }, 2000);
+        });
+      });
+    </script>
+
+  </body>
+</html>

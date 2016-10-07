@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Double Y Axis Chart</title>
+
+        <!-- used by local runs, will 404 from with the IIDx -->
+        <link href="../../../css/iidx-charts.css" rel="stylesheet">
+
+        <!-- used by runs from within the IIDx, will 404 locally -->
+        <link href="/css/iids.css" rel="stylesheet">
+
+    </head>
+    <body>
+      <p>HighCharts example, showing a line chart with a double y-axis</p>
+      <div id="double-y-axis" class="chart"></div>
+
+      <!-- used by local runs, will 404 from with the IIDx -->
+      <script src="../../../components/requirejs/require.js"></script>
+      <script src="../../require.config.js"></script>
+
+      <!-- used by runs from within the IIDx, will 404 locally -->
+      <script src="/components/requirejs/require.js"></script>
+      <script src="/js/require.config.js"></script>
+      <script>
+          requirejs.config({
+              baseUrl: "/"
+          });
+      </script>
+
+      <script>
+        require( ['jquery', 'charts'], function($, charts) {
+          $(function() {
+            // Double Y Axis
+            var doubleYAxisConfig = {
+              series: [{
+                name: "ISO Corrected Power",
+                data: [[1365739200000, 223.68],[1368158400000, 222.23],[1368417600000, 223.76],[1368504000000, 223.16],[1368590400000, 222.78],[1368676800000, 223.85],[1368763200000, 223.11],[1368849600000, 222.44],[1369195200000, 222.67],[1369368000000, 224.62],[1369454400000, 224.7],[1369540800000, 224.71],[1369627200000, 224.14],[1369713600000, 224.15],[1369800000000, 223.57],[1369886400000, 225.15],[1370232000000, 224.22],[1370318400000, 224.91],[1370404800000, 223.64],[1370577600000, 223.77],[1370750400000, 222.78],[1370836800000, 223.52],[1371355200000, 225.34],[1371441600000, 224.69],[1371528000000, 225.98],[1373947200000, 222.62],[1374120000000, 222.98],[1374206400000, 223.31],[1383541200000, 220.69],[1383973200000, 220.6],[1386565200000, 220.13]],
+                yAxis: 0
+              },{
+                name: "ISO Corrected HHV Heat Rate",
+                data: [[1365739200000, 9747.41],[1368158400000, 9795.82],[1368417600000, 9753.1],[1368504000000, 9768.58],[1368590400000, 9772.8],[1368676800000, 9752.51],[1368763200000, 9768.22],[1368849600000, 9791.49],[1369195200000, 9776.58],[1369368000000, 9734.81],[1369454400000, 9728.42],[1369540800000, 9724.87],[1369627200000, 9735.82],[1369713600000, 9737.81],[1369800000000, 9750.04],[1369886400000, 9712.04],[1370232000000, 9747.34],[1370318400000, 9732.24],[1370404800000, 9761.1],[1370577600000, 9762.27],[1370750400000, 9769.87],[1370836800000, 9762.43],[1371355200000, 9720.89],[1371441600000, 9729.54],[1371528000000, 9699.69],[1373947200000, 9782.01],[1374120000000, 9765.58],[1374206400000, 9753.1],[1383541200000, 9827.6],[1383973200000, 9834.88],[1386565200000, 9859.02]],
+                yAxis: 1
+              }],
+              legend: {
+                align: "center",
+                verticalAlign: "top",
+                floating: false,
+                margin: 20,
+                width: 1514
+              },
+              xAxis: {
+                type: "datetime",
+                lineColor: "#bfc2c5",
+                gridLineWidth: 1,
+                tickInterval: 2592000000,
+                dateTimeLabelFormats: {
+                  month: "%b"
+                }
+              },
+              yAxis: [{
+                offset: 15,
+                tickColor: "#005CB9",
+                tickWidth: 1,
+                lineWidth: 1,
+                lineColor: "#005CB9",
+                title: {
+                  text: "MW",
+                  align: "low",
+                  rotation: 0,
+                  offset: 0,
+                  y: 28,
+                  style: {
+                    color: "#005CB9"
+                  }
+                },
+                labels: {
+                  align: "left",
+                  x: 10,
+                  style: {
+                    color: "#005CB9"
+                  }
+                },
+                opposite: true
+              },
+              {
+                offset: 70,
+                gridLineWidth: 0,
+                tickColor: "#ff9821",
+                tickWidth: 1,
+                lineWidth: 1,
+                lineColor: "#ff9821",
+                title: {
+                  text: "Kj/KWh",
+                  align: "low",
+                  rotation: 0,
+                  offset: 0,
+                  y: 28,
+                  style: {
+                    color: "#ff9821"
+                  }
+                },
+                labels: {
+                  align: "left",
+                  x: 10,
+                  style: {
+                    color: "#ff9821"
+                  }
+                },
+                opposite: true
+              }
+            ]};
+            charts.spline('double-y-axis', doubleYAxisConfig);
+          });
+        });
+      </script>
+
+    </body>
+</html>

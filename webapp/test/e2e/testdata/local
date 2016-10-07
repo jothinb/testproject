@@ -1,0 +1,14 @@
+module.exports = {
+
+	URL:					'http://localhost:9000/hopper/',
+	SESSIOIN_ID:			'sssss_01', 
+	SSO_ID:					'RC360WSAI',
+
+	SUITES: {
+		TSO: {
+		USERNAME: 'RC360WSAI',
+		PASSWORD: 'Kg76j46j',
+		ROLE: 'TSO'
+		},
+	},
+};

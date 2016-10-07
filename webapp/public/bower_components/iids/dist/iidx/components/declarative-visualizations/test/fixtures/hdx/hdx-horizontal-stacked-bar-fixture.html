@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../../../css/hdx-declarative-visualizations.css" rel="stylesheet">
+    <link href="base/components/declarative-visualizations/css/hdx-declarative-visualizations.css" rel="stylesheet">
+    <link href="base/css/hdx-declarative-visualizations.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Contextual Horizontal Stacked Bar</h1>
+    <section id="pill-viz" class="module span6">
+      <header class="module-header">
+        <h3 class="voice voice-brand pull-left">Lights On</h3>
+      </header>
+      <div class="module-body">
+        <style type="text/css" media="screen">
+          div.viz-point-label {
+          position: absolute;
+          text-align: right;
+          white-space: nowrap;
+          }
+        </style>
+        <div data-visualization="pill" data-values="1,1,1" data-label="Total Lorem Ipsum" data-classes="success,warning,danger" data-thickness="12">
+        </div>
+
+        <div id="single" data-visualization="pill" data-values="1" data-label="Total Lorem Ipsum" data-classes="success,warning,danger" data-thickness="12">
+        </div>
+
+        <div id="double" data-visualization="pill" data-values="1,1,0" data-label="Total Lorem Ipsum" data-classes="success,warning,danger" data-thickness="12">
+        </div>
+
+        <div id="tail" data-visualization="pill" data-values="0,1,1" data-label="Total Lorem Ipsum" data-classes="success,warning,danger" data-thickness="12">
+        </div>
+
+        <div id="head" data-visualization="pill" data-values="1,0,1" data-label="Total Lorem Ipsum" data-classes="success,warning,danger" data-thickness="12">
+        </div>
+
+
+        </div>
+      <footer class="module-footer"></footer>
+    </section>
+
+    <script src="../../../components/requirejs/require.js"></script>
+    <script src="../../../js/require.config.js"></script>
+
+    <script src="base/components/requirejs/require.js"></script>
+    <script src="base/js/require.config.js"></script>
+
+    <script>
+      var urlparts = window.location.href.split("/");
+
+      // determine if we are running as a fixture in a Karma test suite
+      // adjust base url appropriately
+      var baseURL;
+      if (urlparts[3] == "debug.html" || urlparts[3] == "context.html") {
+          baseURL = "/base/";
+      } else {
+          baseURL = urlparts[0] + "/" + urlparts[1] + "/" + urlparts[2] + "/" + urlparts[3] + "/" + urlparts[4];
+      }
+
+      require.config({
+        baseUrl: baseURL
+      });
+
+      require(['declarative-visualizations', 'jquery'], function(visualizations) {
+        // Initialize Bar Visualizations
+        $('div[data-visualization="pill"]').each(function(i, element) {
+          var pill = visualizations.pill(element);
+        });
+      });
+
+    </script>
+  </body>
+</html>

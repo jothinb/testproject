@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../css/iidx-declarative-visualizations.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div data-visualization="spiderweb" data-duration="1000" data-max="80000" data-source='[30000, 39000, 62000, 41000, 36000, 64000, 27000, 49000, 51000]'></div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+	    require( ['jquery', 'charts'], function($, charts) {
+	      $(function() {
+	         charts.column('chart-column', seriesConfig);
+	      });
+	    });
+  </script>
+    </script>
+
+  </body>
+</html>

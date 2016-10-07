@@ -1,0 +1,5 @@
+-Dhttp.proxyHost=proxy-src.research.ge.com
+-Dhttp.proxyPort=8080
+-Dhttps.proxyHost=proxy-src.research.ge.com
+-Dhttps.proxyPort=8080
+-Dhttp.nonProxyHosts=*.swcoe.ge.com

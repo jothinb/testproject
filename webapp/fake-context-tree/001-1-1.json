@@ -1,0 +1,20 @@
+[ {
+    "name" : "Thisisit not openable",
+    "identifier" : "001-1-1-1",
+    "category" : "/part/c2z-McGhT8iC0Gn-kdh96w",
+    "nodeIdentifier" : "001-1-1-1",
+    "hasChildren" : true,
+    "entity" : false,
+    "entityType": "level111",
+    "category": "level11"
+},
+{
+    "name" : "No datasources",
+    "identifier" : "001-1-1-2",
+    "category" : "/part/c2z-McGhT8iC0Gn-kdh96w",
+    "nodeIdentifier" : "001-1-1-2",
+    "hasChildren" : true,
+    "entity" : true,
+    "entityType": "level112",
+    "category": "level11"
+}]

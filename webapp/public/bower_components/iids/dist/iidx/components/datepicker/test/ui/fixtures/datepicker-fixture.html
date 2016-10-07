@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf8">
+    <title>GE Software Datepicker</title>
+    <!-- used by local runs, will 404 from with the IIDx -->
+    <link href="../../../css/iidx-datepicker.css" rel="stylesheet">
+
+    <!-- used by runs from within the IIDx, will 404 locally -->
+    <link href="/css/iids.css" rel="stylesheet">
+</head>
+<body>
+
+    <div style="width:200px">
+        <div class="input-group">
+            <input type="text" class="datepicker form-control"/>
+            <span class="input-group-btn">
+                <button class="btn" type="button"><i class="icon-calendar"></i></button>
+            </span>
+        </div>
+    </div>
+
+    <script src="/components/requirejs/require.js"></script>
+
+    <!-- used by local runs, will 404 from with the IIDx -->
+    <script src="../../require.config.js"></script>
+
+    <!-- used by runs from within the IIDx, will 404 locally -->
+    <script src="/js/require.config.js"></script>
+
+    <script>
+        requirejs.config({
+            baseUrl: "/"
+        });
+    </script>
+
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'datepicker'
+        ], function($) {
+            $('.datepicker').datepicker();
+            //add something just so the tests know we're done initing...
+            $('.datepicker').addClass('test-ready');
+        });
+    </script>
+
+</body>
+</html>

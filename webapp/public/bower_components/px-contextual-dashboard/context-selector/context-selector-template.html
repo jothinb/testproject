@@ -1,0 +1,17 @@
+<div id="breadcrumbs" class="breadcrumbs">
+    <span ng-if="contextSelector.shouldShowBreadcrumbEllipsis()">... &gt;</span>
+    <span ng-repeat="breadcrumb in contextSelector.getBreadcrumbs()">
+        <span class="breadcrumb" ng-if="breadcrumb">{{breadcrumb}} &gt;</span>
+    </span>
+</div>
+<div id="context-browser-dropdown" class="dropdown px-dropdown">
+    <div class="dropdown-toggle" data-toggle="dropdown" ng-class="{disabled: !contextSelector.isEnabled()}">
+        <h2 id="context-browser-name" class="pull-left" ng-class="{'context-browser-disabled': !contextSelector.isEnabled()}">
+          {{contextSelector.getContextName()}}
+          <i class="pull-right icon-ico_chevron_down_lg"></i>
+        </h2>
+    </div>
+    <div id="context-browser-dropdown-menu" class="dropdown-menu px-dropdown-menu">
+        <context-browser></context-browser>
+    </div>
+</div>

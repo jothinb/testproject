@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="../css/hdx-modules-lights-off.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="well">
+      <section class="module collapsible">
+        <header class="module-header"><i class="icon-ico_chevron_right_lg"></i>Header</header>
+        <div class="module-body collapse in">Body</div>
+        <footer class="module-footer collapse in">Footer</footer>
+      </section>
+    </div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        "baseUrl": "../"
+      });
+
+      require(['jquery', 'modules'], function($) {
+        $('.module.collapsible').collapsible();
+      });
+    </script>
+
+  </body>
+</html>

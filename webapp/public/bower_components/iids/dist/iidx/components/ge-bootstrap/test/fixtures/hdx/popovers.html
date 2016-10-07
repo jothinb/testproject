@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <link href="../css/ge-bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      .test .popover {
+        display: block;
+        margin: 20px;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body style="margin: 50px;">
+
+    <div class="test">
+
+      <div class="popover top">
+        <div class="arrow"></div>
+        <h3 class="popover-title">Popover top</h3>
+        <div class="popover-content">
+          <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+        </div>
+      </div>
+
+      <div class="popover right">
+        <div class="arrow"></div>
+        <h3 class="popover-title">Popover right</h3>
+        <div class="popover-content">
+          <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+        </div>
+      </div>
+
+      <div class="popover bottom">
+        <div class="arrow"></div>
+        <h3 class="popover-title">Popover bottom</h3>
+        <div class="popover-content">
+          <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+        </div>
+      </div>
+
+      <div class="popover left">
+        <div class="arrow"></div>
+        <h3 class="popover-title">Popover left</h3>
+        <div class="popover-content">
+          <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="well">
+      <a id="popoverTest" href="#" class="btn btn-primary" data-trigger="hover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">hover for popover</a>
+    </div>
+
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      requirejs.config({
+        baseUrl: "../"
+      });
+      require(['ge-bootstrap'], function($) {
+          $('#popoverTest').popover();
+      });
+    </script>
+
+  </body>
+</html>

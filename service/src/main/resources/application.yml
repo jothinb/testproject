@@ -1,0 +1,74 @@
+logging:
+ level:
+  org.springframework.web: DEBUG
+  com.ge.transportation.oasisdemo: DEBUG
+ file: /tmp/oasis-demo-logging-file.log
+
+server:
+ tomcat:
+  accessLogEnabled: true
+  accessLogPattern: \%a asdasd
+    
+spring:
+ datasource:
+  url: jdbc:h2:mem:oasis;DB_CLOSE_DELAY=-1
+  driverClassName: org.h2.Driver
+  username: oasis
+  password: oasis
+  platform: h2
+  initialize: true
+  
+oasis:
+ conversionScale: 10
+ unitMaxLength: 555
+
+ # normalized z values for level 1 to 3
+ level1Z: 0
+ level2Z: 10
+ level3Z: 20
+ 
+ containerWidth: 100
+ 
+ mappingAreaStartY: 160
+ mappingAreaEndY: 12059
+ 
+ groupDistance: 45
+ 
+ ## picking area (stack area) configurations
+ pickingAreaStartY: 11242
+ pickingAreaEndY: 13314
+
+ pickingGroupStartX: 0
+ pickingGroupEndX: 80000
+ pickingGroupDistance: 1000
+
+
+ 
+ # row1 to row4 are rows in picking area
+ row1Y: 12250
+ row2Y: 12350
+ row3Y: 12450
+ row4Y: 12550
+
+ ## row5 is a train
+ # row5Y: 3300
+ row5Y: 10280
+ 
+ ## storage
+ storageStartY: 10718
+ storageStartX: 14533
+ storageEndX: 43099
+ 
+ ## north/south bound roads numbered from west to east
+ road1X:
+ road3X:
+ road5X:
+ road7X:
+ road9X:
+ 
+ ## east/west bound roads numbered from north to south
+ road2Y:
+ road4Y:
+ road6Y:
+ road8Y:
+ road10Y:

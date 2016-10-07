@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <link href="../../../css/hdx-bootstrap.css" rel="stylesheet">
+    <link href="base/components/sparkline/css/hdx-bootstrap.css" rel="stylesheet">
+    <link href="base/css/hdx-bootstrap.css" rel="stylesheet">
+  </head>
+  <body style="margin: 50px;">
+
+    <span class="label">Default</span>
+    <span class="label label-success">Success</span>
+    <span class="label label-warning">Warning</span>
+    <span class="label label-important">Important</span>
+    <span class="label label-info">Info</span>
+    <span class="label label-inverse">Inverse</span>
+
+    <hr>
+
+    <span class="badge">1</span>
+    <span class="badge badge-success">2</span>
+    <span class="badge badge-warning">4</span>
+    <span class="badge badge-important">6</span>
+    <span class="badge badge-info">8</span>
+    <span class="badge badge-inverse">10</span>
+
+    <!-- Some refs will fail here depending on load context -->
+    <script src="../../../components/requirejs/require.js"></script>
+    <script src="../../../js/require.config.js"></script>
+
+    <script src="base/components/requirejs/require.js"></script>
+    <script src="base/js/require.config.js"></script>
+
+    <script type="text/javascript">
+      var urlparts = window.location.href.split("/");
+
+      // determine if we are running as a fixture in a Karma test suite
+      // adjust base url appropriately
+      var baseURL;
+      if (urlparts[3] == "debug.html" || urlparts[3] == "context.html") {
+          baseURL = "/base/";
+      } else {
+          baseURL = urlparts[0] + "/" + urlparts[1] + "/" + urlparts[2] + "/" + urlparts[3] + "/" + urlparts[4];
+      }
+
+      require.config({
+        baseUrl: baseURL
+      });
+
+      require([
+        'jquery',
+        'ge-bootstrap'
+        ], function () {
+        });
+    </script>
+
+  </body>
+</html>

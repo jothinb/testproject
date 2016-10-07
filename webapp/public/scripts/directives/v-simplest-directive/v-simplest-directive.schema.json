@@ -1,0 +1,12 @@
+{
+    "id": "v-simplest-directive",
+    "name": "Simple Directive",
+    "type": "hello-world",
+    "schema": {
+        "type": "object",
+        "properties": {
+        },
+        "required": []
+    },
+    "defaultOptions": {}
+}

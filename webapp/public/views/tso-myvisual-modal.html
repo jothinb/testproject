@@ -1,0 +1,204 @@
+<div id="myVisualModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modalvisual" >
+		<div class="modal-content">
+			<form name="myForm" class="myForm">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="cancelVisual()"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">Add Visualization</h3>
+			</div>
+			<div class="modal-body">
+				<div class="div1">
+					<div class="div1_1">
+						<div class="selectDataDiv"><label class="labelMargin">Filter Tables:</label>
+							<div class="input-group pad10">
+								<input type="text" class="form-control" ng-model="DatasetsDisplay">
+								<span class="input-group-btn">
+							<button class="btn btn-default" type="button" ng-click="addDatasets()"><i class="icon-search"></i></button>
+						</span>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="div1_2">
+						<div ng-repeat="item in datasetInfo | filter:DatasetsDisplay">
+							<label class="labelMargin">{{item.dataSetName}}</label>
+							<div class="accordion-group ng-isolate-scope" ng-repeat="tableItem in item.tables | filter:DatasetsDisplay">
+								<div class="accordion-heading">
+									<label class="accordion-toggle ng-binding cursorPointer labelMargin" ng-click="isOpen = !isOpen"><i class="icon-angle-right"></i><span class="labelMargin">{{tableItem.tableName}}</span></label>
+								</div>
+								<div class="accordion-body collapse accDiv" collapse="!isOpen">
+									<div>
+										<div ng-repeat="columnItem in allTableEntriesMapByTableId[tableItem.dataTableId] track by $index">
+											<input type="checkbox" class="mRight6" ng-model="allTableEntries[columnItem.index].checked">{{columnItem.columnName}}
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</div>
+				</div>
+				<div class="div2">
+					<div class="div2_1">
+						<div>
+							<h3 class="labelMargin">Chart Selection</h3>
+							<div>
+								<label class="labelMarginStar">Type *</label>
+								<select id="ChartType" name="ChartType" class="form-control inline50 width35" ng-class="{'errorBorder': ChartTypeError}" ng-change="ChartTypeVali(selectedDataSet.charttype)" ng-model="selectedDataSet.charttype" ng-options="obj.value as obj.text for obj in chartType"></select>
+								<span class="error" ng-if="ChartTypeError">This is a required field.</span>
+							</div>
+							<div>
+								<label for="title" class="labelMarginStar">Title *</label>
+								<input id="title" name="titleName" type="text" class="width35" ng-model="selectedDataSet.title" ng-class="{'errorBorder': titleError}" ng-change="titleVali(selectedDataSet.title)">
+								<span class="error" ng-if="titleError">This is a required field.</span>
+							</div>
+							<div>
+								<label for="subtitle" class="labelMarginStar">Subtitle</label>
+								<input id="subtitle" type="text" class="width35" ng-model="selectedDataSet.subtitle">
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div ng-if="selectedDataSet.charttype === 'GeoSpatial'" class="div2_2">
+						<h3 class="labelMargin">Data Configuration</h3>
+						<div>
+							<label for="markerName" class="labelMarginStar">Collection *</label>
+							<input id="markerName" name="markerName" type="text" class="width35" ng-model="selectedDataSet.collection1" ng-class="{'errorBorder': markerNameError}" ng-change="markerNameVali(selectedDataSet.collection1)">
+							<span class="error" ng-if="markerNameError">This is a required field.</span>
+						</div>
+						<div>
+							<label for="table" class="labelMarginStar">Table *</label>
+							<!-- label for value in array | orderBy:orderexpr track by trackexpr-->
+							<select id="table" name="table" class="form-control inline50 width35" ng-options="tableEntry.tableName for tableEntry in filterTablesWithCheckedColumns() track by tableEntry.tableId" ng-model="selectedDataSet.table1" ng-class="{'errorBorder': tableError}" ng-change="tableVali(selectedDataSet.table1)"></select>
+							<span class="error" ng-if="tableError">This is a required field.</span>
+						</div>
+
+						<div ng-if="selectedDataSet.table1">
+							<label class="labelMarginStar">Data Type *</label>
+							<input type="radio" name="optionsRadios" ng-model="dataType.selected" value="ADDRESS" checked="" ng-change="changeRadio1()"> Address
+							<input class="mLeft45" type="radio" name="optionsRadios" ng-model="dataType.selected" value="LATLON" ng-change="changeRadio1()"> Latitude / Longitude
+						</div>
+						<div ng-if="dataType.selected === 'LATLON' && selectedDataSet.table1">
+							<div>
+								<label for="Latitude" class="labelMarginStar">Latitude *</label>
+								<select id="Latitude" name="Latitude" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table1)" ng-model="selectedDataSet.latitude1" ng-class="{'errorBorder': LatitudeError}" ng-change="LatitudeVali(selectedDataSet.latitude1)"></select>
+								<span class="error" ng-if="LatitudeError">This is a required field.</span>
+							</div>
+							<div>
+								<label for="Longitude" class="labelMarginStar">Longitude *</label>
+								<select id="Longitude" name="Longitude" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table1)" ng-model="selectedDataSet.longitude1" ng-class="{'errorBorder': LongitudeError}" ng-change="LongitudeVali(selectedDataSet.longitude1)"></select>
+								<span class="error" ng-if="LongitudeError">This is a required field.</span>
+							</div>
+						</div>
+						<div ng-if="dataType.selected === 'ADDRESS' && selectedDataSet.table1">
+							<div>
+								<label for="Street" class="labelMarginStar">Street</label>
+								<select id="Street" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table1)" ng-model="selectedDataSet.street1" ></select>
+							</div>
+							<div>
+								<label for="City" class="labelMarginStar">City</label>
+								<select id="City" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table1)" ng-model="selectedDataSet.city1" ></select>
+							</div>
+							<div>
+								<label for="State" class="labelMarginStar">State</label>
+								<select id="State" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table1)" ng-model="selectedDataSet.state1" ></select>
+							</div>
+							<div>
+								<label for="ZipCode" class="labelMarginStar">Zip Code</label>
+								<select id="ZipCode" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table1)" ng-model="selectedDataSet.zipcode1" ></select>
+							</div>
+							<div>
+								<label for="Country" class="labelMarginStar">Country</label>
+								<select id="Country" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table1)" ng-model="selectedDataSet.country1" ></select>
+							</div>
+						</div>
+						<div ng-if="dataType.selected && selectedDataSet.table1">
+							<div>
+								<label for="Label" class="labelMarginStar">Label</label>
+								<select id="Label" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table1)" ng-model="selectedDataSet.label1"></select>
+							</div>
+							<div>
+								<label for="Information" class="labelMarginStar">Information</label>
+								<select id="Information" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table1)" ng-model="selectedDataSet.information1" ></select>
+							</div>
+						</div>
+						<div>
+							<div ng-show="!dataSet2 && selectedDataSet.table1" ng-click="addAddSets()" class="cursorPointer labelMargin"><i class="icon-plus-sign"></i> Add additional set</div>
+						</div>
+						<hr>
+						<div ng-if="dataSet2">
+							<h3 class="labelMargin">Data Configuration 2</h3>
+							<div>
+								<label for="markerName2" class="labelMarginStar">Collection *</label>
+								<input id="markerName2" type="text" class="width35" ng-model="selectedDataSet.collection2" ng-class="{'errorBorder': markerNameError2}" ng-change="markerNameVali2(selectedDataSet.collection2)">
+								<span class="error" ng-if="markerNameError2">This is a required field.</span>
+							</div>
+							<div>
+								<label for="table2" class="labelMarginStar">Table *</label>
+								<select id="table2" class="form-control inline50 width35" ng-options="tableEntry.tableName for tableEntry in filterTablesWithCheckedColumns() track by tableEntry.tableId" ng-model="selectedDataSet.table2" ng-class="{'errorBorder': tableError2}" ng-change="tableVali2(selectedDataSet.table2)"></select>
+								<span class="error" ng-if="tableError2">This is a required field.</span>
+							</div>
+							<div ng-if="selectedDataSet.table2">
+								<label class="labelMarginStar">Data Type *</label>
+								<input type="radio" name="optionsRadios2" ng-model="dataType.selected2" value="ADDRESS" checked="" ng-change="changeRadio2()"> Address
+								<input class="mLeft45" type="radio" name="optionsRadios2" ng-model="dataType.selected2" value="LATLON" ng-change="changeRadio2()"> Latitude / Longitude
+							</div>
+							<div ng-if="dataType.selected2 === 'LATLON' && selectedDataSet.table2">
+								<div>
+									<label for="Latitude2" class="labelMarginStar">Latitude *</label>
+									<select id="Latitude2" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table2)" ng-model="selectedDataSet.latitude2" ng-class="{'errorBorder': LatitudeError2}" ng-change="LatitudeVali2(selectedDataSet.latitude2)"></select>
+									<span class="error" ng-if="LatitudeError2">This is a required field.</span>
+								</div>
+								<div>
+									<label for="Longitude2" class="labelMarginStar">Longitude *</label>
+									<select id="Longitude2" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table2)" ng-model="selectedDataSet.longitude2" ng-class="{'errorBorder': LongitudeError2}" ng-change="LongitudeVali2(selectedDataSet.longitude2)"></select>
+									<span class="error" ng-if="LongitudeError2">This is a required field.</span>
+								</div>
+							</div>
+							<div ng-if="dataType.selected2 === 'ADDRESS' && selectedDataSet.table2">
+								<div>
+									<label for="Street2" class="labelMarginStar">Street</label>
+									<select id="Street2" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table2)" ng-model="selectedDataSet.street2" ></select>
+								</div>
+								<div>
+									<label for="City2" class="labelMarginStar">City</label>
+									<select id="City2" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table2)" ng-model="selectedDataSet.city2" ></select>
+								</div>
+								<div>
+									<label for="State2" class="labelMarginStar">State</label>
+									<select id="State2" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table2)" ng-model="selectedDataSet.state2" ></select>
+								</div>
+								<div>
+									<label for="ZipCode2" class="labelMarginStar">Zip Code</label>
+									<select id="ZipCode2" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table2)" ng-model="selectedDataSet.zipcode2" ></select>
+								</div>
+								<div>
+									<label for="Country2" class="labelMarginStar">Country</label>
+									<select id="Country2" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table2)" ng-model="selectedDataSet.country2" ></select>
+								</div>
+							</div>
+							<div ng-if="dataType.selected2 && selectedDataSet.table2">
+								<div>
+									<label for="Label2" class="labelMarginStar">Label</label>
+									<select id="Label2" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table2)" ng-model="selectedDataSet.label2"></select>
+								</div>
+								<div>
+									<label for="Information2" class="labelMarginStar">Information</label>
+									<select id="Information2" class="form-control inline50 width35" ng-options="columnEntry.columnName for columnEntry in getColumnsForSelectedTable(selectedDataSet.table2)" ng-model="selectedDataSet.information2" ></select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="div2_3">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="cancelVisual()">Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click="createVisual()">Create</button>
+			</div>
+	</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,26 @@
+{
+  "name": "px-contextual-dashboard",
+  "authors": [
+    "Predix Experience"
+  ],
+  "description": "The contextual dashboard angular module",
+  "main": "main.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "predix",
+    "dashboard",
+    "contextual"
+  ],
+  "license": "MIT",
+  "_release": "14.3E",
+  "_resolution": {
+    "type": "tag",
+    "tag": "14.3E",
+    "commit": "cb4bc4618cb0d9b8210b02c6ceee948dae400357"
+  },
+  "_source": "git://github.sw.ge.com/Predix-Experience/px-contextual-dashboard.git",
+  "_target": "14.3E",
+  "_originalSource": "git://github.sw.ge.com/Predix-Experience/px-contextual-dashboard.git"
+}

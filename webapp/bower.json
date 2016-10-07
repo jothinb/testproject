@@ -1,0 +1,31 @@
+{
+  "name": "my-application",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests",
+    "target",
+    "test-target"
+  ],
+  "dependencies": {
+    "requirejs-plugins": "1.0.2",
+    "require-css": "0.1.1",
+    "angular": "1.2.14",
+    "angular-route": "1.2.14",
+    "angular-resource": "1.2.14",
+    "angular-sanitize": "1.2.14",
+    "angular-mocks": "1.2.14",
+    "angular-ui-router": "0.2.10",
+    "lodash": "2.4.1",
+    "angular-schema-form": "0.7.6",
+    "angular-bootstrap": "0.8.0",
+    "px-datagrid": "git://github.sw.ge.com/PredixWidgetCatalog/px-datagrid.git#14.3E",
+    "px-time-series": "git://github.sw.ge.com/PredixWidgetCatalog/px-time-series.git#14.3E",
+    "px-contextual-dashboard": "git://github.sw.ge.com/Predix-Experience/px-contextual-dashboard.git#14.3E"
+  }
+}
+

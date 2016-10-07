@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <link href="../../../css/hdx-bootstrap.css" rel="stylesheet">
+    <link href="base/css/hdx-bootstrap.css" rel="stylesheet">
+  </head>
+  <body style="margin: 50px;">
+
+  	<p>Morbi hendrerit, nisl quis <code id="ex1" >&lt;em&gt;dapis&lt;/em&gt;</code> semper, ipsum mi ultricies ipsum, quis vestibulum nisl ante vitae dui.</p>
+
+<pre id="ex2">
+&lt;div class="btn-group"&gt;
+  &lt;a class="btn" href="#"&gt;1&lt;/a&gt;
+  &lt;a class="btn" href="#"&gt;2&lt;/a&gt;
+  &lt;a class="btn" href="#"&gt;3&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+
+<pre id="ex3" class="prettyprint linenums lang-html">
+&lt;pre class="prettyprint linenums"&gt;
+&lt;p&gt;Sample text here...&lt;/p&gt;
+&lt;/pre&gt;
+</pre>
+
+
+  <!-- Some refs will fail here depending on load context -->
+  <script src="../../../components/requirejs/require.js"></script>
+  <script src="../../../js/require.config.js"></script>
+
+  <script src="base/components/requirejs/require.js"></script>
+  <script src="base/js/require.config.js"></script>
+
+  <script type="text/javascript">
+    var urlparts = window.location.href.split("/");
+
+    // determine if we are running as a fixture in a Karma test suite
+    // adjust base url appropriately
+    var baseURL;
+    if (urlparts[3] == "debug.html" || urlparts[3] == "context.html") {
+        baseURL = "/base/";
+    } else {
+        baseURL = urlparts[0] + "/" + urlparts[1] + "/" + urlparts[2] + "/" + urlparts[3] + "/" + urlparts[4];
+    }
+
+    require.config({
+      baseUrl: baseURL
+    });
+
+    
+    
+    
+    require(['jquery','ge-bootstrap', 'prettify'], function($) {
+        window.prettyPrint && prettyPrint();
+    });
+  </script>
+
+  </body>
+</html>

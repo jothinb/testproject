@@ -1,0 +1,142 @@
+[
+    {
+        "id": "context.view1",
+        "name": "View 1",
+        "cards": [
+            {
+                "cardId": "px-datagrid",
+                "name": "Datagrid",
+                "size": "full",
+                "type": "datagrid",
+                "displayOrder": 1,
+                "cardVersion": "1.0.0",
+                "options":{
+                    "title": "Conditions",
+                    "selectedSize": "half"
+                },
+                "datasource": {
+                    "id": "mock-datagrid",
+                    "type": "datagrid",
+                    "options":{
+                        "dataSet": "1"
+                    }
+                }
+            },
+            {
+                "cardId": "v-hello-world",
+                "name": "Hello World",
+                "size": "half",
+                "type": "hello-world",
+                "displayOrder": 2,
+                "cardVersion": "1.0.0",
+                "options":{
+                    "message": "this is saved",
+                    "color": "color-purple"
+                },
+                "datasource": {
+                    "id": "mock-helloworld",
+                    "type": "hello-world",
+                    "options":{
+                        "endTime": 55,
+                        "startTime": 54
+                    }
+                }
+            },
+            {
+                "cardId": "v-simplest-directive",
+                "name": "Simplest Directive",
+                "size": "half",
+                "type": "hello-world",
+                "displayOrder": 3,
+                "cardVersion": "1.0.0",
+                "options": {},
+                "datasource": {
+                    "id": "mock-helloworld",
+                    "type": "hello-world",
+                    "options": {
+                        "endTime": 55,
+                        "startTime": 54
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": "context.view2",
+        "name": "Empty view",
+        "cards": []
+    },
+    {
+        "id": "context.viewxxx",
+        "name": "Bad View",
+        "cards": [
+            {
+                "cardId": "widget-doesnt-exist",
+                "name": "Datagrid",
+                "size": "full",
+                "type": "datagrid",
+                "displayOrder": 1,
+                "cardVersion": "1.0.0",
+                "options": {},
+                "datasource": {
+                    "id": "mock-datagrid",
+                    "url": "http://localhost:9000/mockdatagrid",
+                    "type": "datagrid",
+                    "options": {
+                        "title": "Conditions",
+                        "selectedSize": "half"
+                    }
+                }
+            },
+            {
+                "cardId": "v-hello-world",
+                "name": "Hello World",
+                "size": "half",
+                "type": "hello-world",
+                "displayOrder": 2,
+                "cardVersion": "1.0.0",
+                "options":{
+                    "message": "this is saved",
+                    "color": "color-purple"
+                },
+                "datasource": {
+                    "id": "mock-helloworld",
+                    "url": "http://localhost:9000/mockhelloworld",
+                    "type": "hello-world",
+                    "options":{
+                        "endTime": 55,
+                        "startTime": 54
+                    }
+                }
+            },
+            {
+                "cardId": "v-simplest-directive",
+                "name": "Simplest Directive",
+                "size": "half",
+                "type": "hello-world",
+                "displayOrder": 3,
+                "cardVersion": "1.0.0",
+                "options":{},
+                "datasource": {
+                    "id": "mock-helloworld",
+                    "url": "http://localhost:9000/mockhelloworld",
+                    "type": "hello-world",
+                    "options":{
+                        "endTime": 55,
+                        "startTime": 54
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": "context.undeletable",
+        "name": "UndeletableView",
+        "cards": []
+    },
+    {
+        "id": "context.notupdatable",
+        "name": "NotUpdatableView",
+        "cards": []
+    }
+]

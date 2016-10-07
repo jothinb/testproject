@@ -1,0 +1,120 @@
+[
+    {
+        "id": "mock-helloworld",
+        "name": "HelloWorldDS",
+        "url": "http://localhost:9000/mockhelloworld",
+        "type": "hello-world",
+        "get": {
+            "request": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "startTime": {
+                            "type": "number",
+                            "title": "Start Time",
+                            "minimum": 0
+                        },
+                        "endTime": {
+                            "type": "number",
+                            "title": "End Time",
+                            "minimum": 0
+                        }
+                    }
+                },
+                "required": [
+                    "startTime",
+                    "endTime"
+                ],
+                "defaultOptions": {
+                    "startTime": 1000,
+                    "endTime": 2000,
+                    "sampleRate": "10"
+                }
+            },
+            "response": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "title": {
+                            "type": "string",
+                            "items": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "bad-ds",
+        "name": "BadDS",
+        "url": "thiswontwork",
+        "type": "datagrid",
+        "get": {
+            "request": {},
+            "response": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "tableData": {
+                            "type": "array"
+                        },
+                        "columns": {
+                            "type": "array"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "badts-ds",
+        "name": "BadTimeSeriesDS",
+        "url": "thiswontwork",
+        "type": "time-series",
+        "get": {
+            "request": {},
+            "response": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "series": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "number"
+                                                },
+                                                {
+                                                    "type": "number"
+                                                }
+                                            ],
+                                            "minItems": 2
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "data"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "series"
+                    ]
+                }
+            }
+        }
+    }
+]

@@ -1,0 +1,1 @@
+define(['./widget-renderer-directive','./widget-renderer-controller'], function() {});

@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Pagient Module</title>
+    <meta charset="utf8">
+    <link href="../css/hdx-modules.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+  </head>
+  <body style="margin:50px; min-width:940px;">
+<div class="hds-modules">
+    <section class="module module-patient">
+      <figure class="patient-photo pull-left">
+        <img src="../img/hdx/patient.png" alt="Patient photo">
+      </figure>
+      <div class="pull-left">
+        <h1 class="voice voice-brand">Van DerHoote, Doris</h1>
+        <div class="patient-number">009 18 721</div>
+        <table class="table-overview ">
+          <tbody>
+            <tr>
+              <td>F</td>
+              <td>68</td>
+              <td>25 Nov 1945</td>
+              <td>5&rsquo; 3&rdquo;</td>
+              <td>114 lbs</td>
+              <td>Dr. J. Fraserton</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Sex</th>
+              <th>Age</th>
+              <th>DOB</th>
+              <th>Height</th>
+              <th>Weight</th>
+              <th>PCP</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="btn-group pull-right">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">Go to... <i class="icon-chevron-down"></i></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div>
+    </section>
+</div>
+    <script src="../components/requirejs/require.js"></script>
+    <script src="../js/require.config.js"></script>
+    <script type="text/javascript">
+      require.config({
+        baseUrl: '../'
+      });
+
+      require([
+        'ge-bootstrap'
+        ], function () {
+
+        });
+    </script>
+
+  </body>
+</html>

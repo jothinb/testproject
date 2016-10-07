@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <link href="../../../css/hdx-bootstrap.css" rel="stylesheet">
+    <link href="base/components/sparkline/css/hdx-bootstrap.css" rel="stylesheet">
+    <link href="base/css/hdx-bootstrap.css" rel="stylesheet">  
+  </head>
+  <body style="margin: 50px;">
+
+
+    <button type="button" class="btn">Default</button>
+    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-inverse">Inverse</button>
+
+    <br><br>
+
+    <button type="button" class="btn btn-large">Action</button>
+    <button type="button" class="btn btn-small">Action</button>
+    <button type="button" class="btn btn-mini">Action</button>
+    
+    <button type="button" class="btn btn-lg btn-primary">Primary Action</button>
+    <button type="button" class="btn btn-sm btn-primary">Primary Action</button>
+    <button type="button" class="btn btn-xs btn-primary">Primary Action</button>
+    
+    <br><br>
+    
+    <button class="btn btn-lg btn-primary disabled" href="#">Primary Button</button>
+    <button class="btn btn-lg disabled" href="#">Button</button>
+    
+    <br><br>
+    
+    <div class="btn-group">
+      <button class="btn">Left</button>
+      <button class="btn">Middle</button>
+      <button class="btn">Right</button>
+    </div>
+    
+    <div class="btn-group">
+      <button class="btn btn-primary">Left</button>
+      <button class="btn btn-primary">Middle</button>
+      <button class="btn btn-primary">Right</button>
+    </div>
+    
+    <br><br>
+    
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <button class="btn">1</button>
+        <button class="btn">2</button>
+        <button class="btn">3</button>
+      </div>
+      <div class="btn-group">
+        <button class="btn">4</button>
+        <button class="btn">5</button>
+        <button class="btn">6</button>
+      </div>
+      <div></div>
+    </div>
+    
+
+  <!-- Some refs will fail here depending on load context -->
+
+    <script src="../../../components/requirejs/require.js"></script>
+    <script src="../../../js/require.config.js"></script>
+
+    <script src="base/components/requirejs/require.js"></script>
+    <script src="base/js/require.config.js"></script>
+
+    <script type="text/javascript">
+      var urlparts = window.location.href.split("/");
+
+      // determine if we are running as a fixture in a Karma test suite
+      // adjust base url appropriately
+      var baseURL;
+      if (urlparts[3] == "debug.html" || urlparts[3] == "context.html") {
+          baseURL = "/base/";
+      } else {
+          baseURL = urlparts[0] + "/" + urlparts[1] + "/" + urlparts[2] + "/" + urlparts[3] + "/" + urlparts[4];
+      }
+
+      require.config({
+        baseUrl: baseURL
+      });
+
+      require([
+        'jquery',
+        'ge-bootstrap',
+        'prettify'
+        ], function () {
+          window.prettyPrint && prettyPrint();
+        });
+    </script>
+
+  </body>
+</html>

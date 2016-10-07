@@ -1,0 +1,24 @@
+{
+    "id": "bad-widget",
+    "name": "BadWidget",
+    "path": "/widget2/widget2.js",
+    "type": "hello-world",
+    "schema": {
+        "type": "object",
+        "properties": {
+            "message": {
+                "type": "string",
+                "title": "Message",
+                "minLength": "2",
+                "maxLength": "15"
+            },
+            "color": {
+                "type": "string",
+                "title": "Color",
+                "pattern": "^color-\\S+$"
+            }
+        },
+        "required": ["message", "color"]
+    },
+    "defaultOptions": {"message": "a", "color": "abc"}
+}

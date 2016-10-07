@@ -1,0 +1,38 @@
+
+<div ng-if="filteredResult" class="containerSearchResult">
+    <span>{{filteredResult.length}} Results</span>
+    <span class="dismissSearchResults"><i class="icon-remove-circle" ng-click="dismissResults($event)"></i></span>
+    <div style="max-height:368px; overflow:auto">
+        <div class="module" ng-class="{selectedModule: item.selected}" ng-repeat="item in filteredResult">
+            <small-card info="item" ng-click="focusContainer($event, item)"></small-card>
+        </div>
+    </div>
+</div>
+<div class="largeCardPane" ng-show="focusedContainer">
+    <div class="module">
+        <large-card info="focusedContainer"></large-card>
+    </div>
+</div>
+<div class="trainCardPane" ng-show="trainContainers">
+    <div class="module">
+        <div class="trainCard">
+            <div class="card-header">
+                <div class="pull-left" style="margin-right:10px;"><span>--&gt;</span></div>
+                <div class="pull-left"><span>SLPKSCO486</span></div>
+                <div class="lcDismiss pull-right" ><i class="icon-remove-sign" ng-click="dismissResults($event)"></i></div>
+            </div>
+            <div class="subHeader">
+                <div class="pull-left weight-details">
+                    <div class="weight-icon"></div><span>500 lbs</span>
+                </div>
+                <div class="pull-left length-details">
+                    <span>&lt;--</span><span>92 ft</span><span>--&gt;</span>
+                </div>
+                <div class="pull-left time-details">
+                    <span class="pull-right">06-13-15 23:00</span>
+                </div>
+            </div>
+        </div>
+        <train-card info="trainContainers"></train-card>
+    </div>
+</div>

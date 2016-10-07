@@ -1,0 +1,113 @@
+
+<div id="upload" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="clearField()"><span aria-hidden="true">&times;</span></button>
+                <h3>Import Data</h3>
+            </div>
+            <div class="modal-body">
+                <div ng-hide="dBConnected" class="marginBottom">
+                    <label for="datasources">Data Source *</label>
+                    <select id="datasources" name="datasources" ng-model="datasource" ng-options="value for value in dataSources" ng-change="resetErrors()"></select>
+                </div>
+                <div ng-if="datasource === 'File'">
+                    <div class="marginBottom">
+                        <label for="dataname">Data Set Name *</label>
+                        <input type="text" id="dataname" name="dataname" ng-model="dataset.name" ng-class="{'errorBorder': missingName}" ng-change="validateName(dataset.name)"/>
+                        <span ng-if="missingName" class="error">Data Set Name is required</span>
+                    </div>
+                    <div class="marginBottom">
+                        <label for="tablename">Table Name *</label>
+                        <input type="text" id="tablename" name="tablename" ng-model="dataset.tablename" placeholder="a-z, A-Z, 0-9, _ only" maxlength="64" ng-class="{'errorBorder': missingTableName}" ng-change="validateTableName(dataset.tablename)"/>
+                        <span ng-if="missingTableName" class="error">Table Name is required</span>
+                    </div>
+                    <div class="marginBottom">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" maxlength="500" row="18" cols="55" ng-model="dataset.description"></textarea>
+                    </div>
+                    <div class="marginBottom">
+                        <span class="fileName">File *</span>
+                        <div class="fileTextContainer">
+                            <span ng-if="!missingFile && uploadText === ''"><em>Browse File</em></span>
+                            <span class="uploadFileName" ng-class="{error : errorFileType}">{{uploadText}}</span>
+                            <span ng-if="missingFile" class="error"> Import File is required</span>
+                            <span ng-if="errorFileType" class="error"> - This file type not yet supported</span>
+                        </div>
+                    </div>
+                    <div class="uploadContainer">
+                        <button class="btn btn-primary" ng-click="initiateBrowse()">Browse</button>
+                        <input type="file" class="hide" ng-model="uploadInput" id="uploadInput" onchange="angular.element(this).scope().selectFileforUpload(this)" />
+                        <span>Supported File Types: xlsx, csv</span>
+                    </div>
+                </div>
+                <div ng-if="(datasource ==='Oracle' || datasource === 'Teradata') && !dBConnected">
+                    <div class="marginBottom">
+                        <label for="connectionURL">Connection URL *</label>
+                        <input type="text" id="connectionURL" name="connectionURL" ng-attr-placeholder="{{datasource === 'Oracle' ? 'jdbc:oracle:thin:@//[HOST][:PORT]/SERVICE': 'jdbc:teradata://MyDatabaseServer/database=MyDatabaseName'}}" ng-model="connection.url" ng-class="{'errorBorder': (connectionErrors.url || connectionErrors.urlFormat)}" ng-change="validateUrl(connection.url)"/>
+                        <span ng-if="connectionErrors.url" class="error">Connection URL is required</span>
+                        <span ng-if="connectionErrors.urlFormat" class="error">Connection URL is incorrect</span>
+                    </div>
+                    <div class="marginBottom">
+                        <label for="username">Username *</label>
+                        <input type="text" id="username" name="username" ng-model="connection.username" ng-class="{'errorBorder': connectionErrors.name}" ng-change="validateUserName(connection.username)"/>
+                        <span ng-if="connectionErrors.name" class="error">Username is required</span>
+                    </div>
+                    <div class="marginBottom">
+                        <label for="passwords">Password *</label>
+                        <input type="password" id="passwords" name="passwords" ng-model="connection.password" ng-class="{'errorBorder': connectionErrors.password}" ng-change="validatePassword(connection.password)"/>
+                        <span ng-if="connectionErrors.password" class="error">Password is required</span>
+                    </div>
+                    <div class="marginLeft" ng-if="connectionErrors.noSchema"><span class="error">No schema exists at this location</span></div>
+                </div>
+                <div ng-if="dBConnected && (datasource === 'Oracle' || datasource === 'Teradata')">
+                    <span>Note: Import times can vary based on a number of factors including import size and internet connection strength.</span>
+                    <div id="schemaContainer" ng-class="{'errorBorder': DBErrors.missingSchema}">
+                        <div class="accordion" id="accordion">
+                            <div ng-repeat="schemas in schemaList" class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" ng-href="#{{schemas.schema}}" ng-click="changeIcon(schemas.schema)">
+                                        <i class="icon-angle-down"></i>{{schemas.schema}}
+                                    </a>
+                                </div>
+                                <div id={{schemas.schema}} class="accordion-body collapsed in">
+                                    <div class="accordion-inner">
+                                        <span ng-repeat="table in schemas.tables"><input type="checkbox" ng-checked="false" value="{{table.tableName}}" ng-click="selectedTableView(schemas.schema, table.tableName, 'table')">{{table.tableName}}</span>
+                                    </div>
+                                    <div class="accordion-inner">
+                                        <span ng-repeat="view in schemas.views"><input type="checkbox" ng-checked="false" value="{{view.tableName}}" ng-click="selectedTableView(schemas.schema, view.tableName, 'view')">{{view.tableName}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span ng-if="DBErrors.missingSchema" class="error">You must select data. This message will refresh on 'import'</span>
+                    <div class="marginTop">
+                        <label for="connName">Data Set Name *</label>
+                        <input type="text" id="connName" name="connName" ng-model="connection.dataName" ng-class="{'errorBorder': DBErrors.name}" ng-change="validateDName(connection.dataName)"/>
+                        <span ng-if="DBErrors.name" class="error">Data Set Name is required</span>
+                    </div>
+                    <div class="marginTop">
+                        <label for="conndescription">Description</label>
+                        <textarea id="conndescription" name="conndescription" maxlength="500" row="18" cols="53" ng-model="connection.description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" ng-click="clearField()">Cancel</button>
+                <div ng-if="datasource === 'File'">
+                    <button class="btn btn-primary" ng-disabled="isDisabled" ng-click="importFiles()">Import</button>
+                </div>
+                <div ng-if="(datasource === 'Oracle' || datasource === 'Teradata') && !dBConnected">
+                    <button class="btn btn-primary" ng-disabled="connectDisabled" ng-click="connectToDB()">Connect</button>
+                </div>
+                <div ng-if="dBConnected && (datasource === 'Oracle' || datasource === 'Teradata')">
+                    <button class="btn btn-primary" ng-click="uploadDB()">Import</button>
+                </div>
+                <div ng-if="datasource === undefined">
+                    <button class="btn btn-primary" ng-disabled="true">Import</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

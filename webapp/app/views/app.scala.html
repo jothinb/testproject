@@ -1,0 +1,149 @@
+
+@import com.ge.dsv.common.util._
+@import play._
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Language.message("Application.name")</title>
+
+    <base href="@Play.application().configuration().getString("application.context", "/")"/>
+
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="@routes.Assets.at("/public/bower_components", "iids/dist/iidx/css/iids.min.css")"/>
+    <link rel="stylesheet" href="@routes.Assets.at("/public/bower_components", "iids/dist/iidx/css/responsive.min.css")"/>
+	<link rel="stylesheet" href="@routes.Assets.at("/public/stylesheets", "app.css")"/>
+
+    <!-- Enables internationalization -->
+    <script type="text/javascript" src="@com.ge.dsv.controllers.routes.MessageController.getMessages()"></script>
+	<!--<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>-->
+
+</head>
+
+<body class="app" data-ng-controller="MainCtrl">
+
+<div class="navbar navbar-default navbar-static-top templatecontainer">
+    <div class="container">
+        <div class="masthead navbar-header">
+            <a class="navbar-brand" href="#">
+                <span class="ge-logo"></span>
+                <span>@Language.message("Application.name")
+                    <small><i>@Language.message("packager.page.gelogo")</i> @Language.message("packager.page.gebusiness")</small>
+                </span>
+                <span class="facilityNameSpacer">|</span>
+                <span class="facilityName">Logistics Park Kansas City</span>
+            </a>
+        </div>
+        <div class="notifications pull-right">
+
+			<!--<div class="input-group">-->
+				<!--<input type="text" class="form-control" placeholder="Search for...">-->
+				<!--<span class="input-group-btn">-->
+					<!--<button class="btn btn-default" type="button">Go!</button>-->
+				<!--</span>-->
+			<!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
+
+			<!--<form class="form-search" style="width: 200px">-->
+				<!--<div class="input-group input-prepend">-->
+					<!--<input type="text" class="form-control search-query">-->
+					<!--<span class="input-group-btn">-->
+						<!--<button type="submit" class="btn btn-icon"><i class="icon-ico_search_lg"></i></button>-->
+					<!--</span>-->
+				<!--</div>-->
+			<!--</form>-->
+			<div class="btn-toolbar">
+                <div class="btn-group">
+                    <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-user"></i>
+                        <span class="user-name">@session.get("loginUserName")</span>
+                        <i class="icon-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <!-- Signout link for authentication -->
+                            <a ng-href="#" data-ng-click="logout($event)" href="#">
+                                <i class="icon-signout"></i> {{ "page.logout" | vmessages }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+		<div class="timeDiv">
+			<img ng-src="/oasis/images/GE-Oasis-UI_150dpi_time-weather.png" class="timeImg" >
+		</div>
+    </div>
+    <!--<div class="Primary-navbar navbar-collapse">-->
+        <!--<div class="container">-->
+            <!--<ul class="nav navbar-nav" data-ng-cloak="">-->
+                <!--<li ui-sref-active="active" data-ng-repeat="tab in App.tabs" tab="tab">-->
+                    <!--<a ui-sref="{{tab.state}}">{{tab.label}}</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+
+
+
+	<!--<form class="form-search">-->
+		<!--<div class="input-append">-->
+			<!--<input type="text"-->
+				   <!--class="input-medium search-query"-->
+				   <!--data-provide="typeahead"-->
+				   <!--data-items="5"-->
+				   <!--data-source='["Alabama","Alaska","Alaska2","Alaska3","Alaska4"]'>-->
+			<!--<button type="submit" class="btn btn-icon"><i class="icon-search"></i></button>-->
+		<!--</div>-->
+	<!--</form>-->
+
+
+
+
+
+</div>
+
+<!--<div id="vasquette" style="position:absolute; z-index:2; right:0; display:block">-->
+	<!--<div class="notifications pull-right">-->
+		<!--<div class="btn-toolbar">-->
+			<!--<div class="btn-group">-->
+				<!--<button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">-->
+					<!--<i class="icon-user"></i>-->
+					<!--<span class="user-name">@session.get("loginUserName")</span>-->
+					<!--<i class="icon-chevron-down"></i>-->
+				<!--</button>-->
+				<!--<ul class="dropdown-menu pull-right">-->
+					<!--<li>-->
+						<!--&lt;!&ndash; Signout link for authentication &ndash;&gt;-->
+						<!--<a ng-href="#" data-ng-click="logout($event)" href="#">-->
+							<!--<i class="icon-signout"></i> {{ "page.logout" | vmessages }}-->
+						<!--</a>-->
+					<!--</li>-->
+				<!--</ul>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</div>-->
+
+
+<!-- MAIN CONTENT -->
+<!--<div class="content container" ui-view>-->
+<div id="ui-view-container" ui-view>
+    <!-- This is the container where the tabs will render -->
+</div>
+<script data-main="@routes.Assets.at("/public/scripts","bootstrapper.js")" src="@routes.Assets.at("/public/bower_components", "iids/dist/iidx/components/requirejs/require.js")"></script>
+
+<script>
+  var oasisHost = "@Play.application().configuration().getString("oasis.service.host")";
+  var oasisPort = "@Play.application().configuration().getString("oasis.service.port")";
+  var oasisBasepath = "@Play.application().configuration().getString("oasis.service.basepath")";
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <link href="../../../css/hdx-bootstrap.css" rel="stylesheet">
+    <link href="base/components/sparkline/css/hdx-bootstrap.css" rel="stylesheet">
+    <link href="base/css/hdx-bootstrap.css" rel="stylesheet">  
+  </head>
+  <body style="margin: 50px;">
+
+
+    <button id="mb1" class="btn btn-mega">Default</button>
+    <button id="mb2" class="btn btn-mega btn-success">Success</button>
+    <button id="mb3" class="btn btn-mega btn-warning">Warning</button>
+    <button id="mb4" class="btn btn-mega btn-danger">Danger</button>
+
+    <br><br>
+	
+	<button id="mb5" class="btn btn-mega disabled" href="#" disabled="disabled" >Mega Button</button>
+	
+    <br><br>
+    <ul  id="mb6"class="btn-mega-group">
+      <li><button class="btn"><i class="icon-refresh"></i>Top</button></li>
+      <li><button class="btn"><i class="icon-refresh"></i>Middle</button></li>
+      <li><button class="btn"><i class="icon-refresh"></i>Two Line<br>Bottom</button></li>
+    </ul>
+    
+    <br><br>
+    
+    <ul id="mb7" class="btn-mega-group">
+      <li><button class="btn disabled" disabled=""><i class="icon-refresh"></i>Top</button></li>
+      <li><button class="btn disabled" disabled=""><i class="icon-refresh"></i>Middle</button></li>
+      <li><button class="btn disabled" disabled=""><i class="icon-refresh"></i>Two Line<br>Bottom</button></li>
+    </ul>
+    
+    
+
+  <!-- Some refs will fail here depending on load context -->
+    <script src="../../../components/requirejs/require.js"></script>
+    <script src="../../../js/require.config.js"></script>
+
+    <script src="base/components/requirejs/require.js"></script>
+    <script src="base/js/require.config.js"></script>
+
+  <script type="text/javascript">
+    var urlparts = window.location.href.split("/");
+
+    // determine if we are running as a fixture in a Karma test suite
+    // adjust base url appropriately
+    var baseURL;
+    if (urlparts[3] == "debug.html" || urlparts[3] == "context.html") {
+        baseURL = "/base/";
+    } else {
+        baseURL = urlparts[0] + "/" + urlparts[1] + "/" + urlparts[2] + "/" + urlparts[3] + "/" + urlparts[4];
+    }
+
+    require.config({
+      baseUrl: '/base/'
+    });    
+    
+    
+    require(['jquery','ge-bootstrap', 'brandkit'], function($) {
+    });
+  </script>
+
+  </body>
+</html>

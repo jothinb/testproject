@@ -1,0 +1,12 @@
+module.exports = {
+
+	URL: 'http://localhost:9000/hopper/',
+
+	SUITES: {
+		TSO: {
+			USERNAME: 'RC360WSAI',
+			PASSWORD: 'Kg76j46j',
+			ROLE: 'TSO'
+		},
+	},
+};
